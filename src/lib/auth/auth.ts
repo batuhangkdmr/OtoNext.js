@@ -8,6 +8,7 @@ const JWT_SECRET = new TextEncoder().encode(
 export interface TokenPayload {
   username: string;
   role: string;
+  [key: string]: string | unknown; // Index signature for JWTPayload compatibility
 }
 
 // Generate JWT Token
