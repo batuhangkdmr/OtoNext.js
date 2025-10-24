@@ -269,6 +269,47 @@ export default async function Home() {
       {/* Hero Slider - Main Banner */}
       <HeroSlider />
 
+      {/* Main Title Section - SEO Focused */}
+      <section className="py-16 md:py-20 bg-gradient-to-b from-gray-50 to-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto text-center">
+            {/* Main Heading - H1 for SEO */}
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold text-primary mb-6 leading-tight">
+              Foton Traktör Yedek Parçaları | Iveco Daily Yedek Parçaları | Karataş Traktör Yedek Parçaları | Mutlu Akü Yedek Parçaları
+            </h1>
+            
+            {/* Description */}
+            <p className="text-lg md:text-xl lg:text-2xl text-gray-700 leading-relaxed max-w-5xl mx-auto font-medium">
+              Foton traktör yedek parçaları, İveco Daily Eurobus yedek parçaları, Karataş traktör 
+              yedek parçaları, Ducato yedek parçaları ve Mutlu akü satışında Türkiye'nin güvenilir 
+              adresi.
+            </p>
+
+            {/* Trust Badges */}
+            <div className="flex flex-wrap justify-center gap-6 mt-10">
+              <div className="flex items-center gap-2 bg-white px-6 py-3 rounded-full shadow-md border-2 border-primary/20">
+                <svg className="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+                <span className="font-bold text-gray-800">50+ Yıl Tecrübe</span>
+              </div>
+              <div className="flex items-center gap-2 bg-white px-6 py-3 rounded-full shadow-md border-2 border-primary/20">
+                <svg className="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
+                </svg>
+                <span className="font-bold text-gray-800">10.000+ Müşteri</span>
+              </div>
+              <div className="flex items-center gap-2 bg-white px-6 py-3 rounded-full shadow-md border-2 border-primary/20">
+                <svg className="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
+                </svg>
+                <span className="font-bold text-gray-800">%100 Güvenilir</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Brands Section - Main Focus */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">

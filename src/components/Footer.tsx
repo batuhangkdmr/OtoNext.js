@@ -11,7 +11,7 @@ export default function Footer() {
     <Box
       component="footer"
       sx={{
-        bgcolor: '#1a1a1a',
+        bgcolor: '#a80000',
         color: 'white',
         py: 6,
         mt: 'auto',
@@ -21,7 +21,7 @@ export default function Footer() {
         <Grid container spacing={4}>
           {/* Company Info */}
           <Grid item xs={12} md={4}>
-            <Typography variant="h6" gutterBottom sx={{ color: '#a80000', fontWeight: 700 }}>
+            <Typography variant="h6" gutterBottom sx={{ color: 'white', fontWeight: 700 }}>
               YÖNEL OTO YEDEK PARÇA
             </Typography>
             <Typography variant="body2" sx={{ mt: 2, lineHeight: 1.8 }}>
@@ -36,19 +36,19 @@ export default function Footer() {
               Hızlı Linkler
             </Typography>
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, mt: 2 }}>
-              <Link href="/" style={{ color: '#ccc', textDecoration: 'none' }}>
+              <Link href="/" style={{ color: 'white', textDecoration: 'none' }}>
                 • Ana Sayfa
               </Link>
-              <Link href="/products" style={{ color: '#ccc', textDecoration: 'none' }}>
+              <Link href="/products" style={{ color: 'white', textDecoration: 'none' }}>
                 • Ürünler
               </Link>
-              <Link href="/blog" style={{ color: '#ccc', textDecoration: 'none' }}>
+              <Link href="/blog" style={{ color: 'white', textDecoration: 'none' }}>
                 • Blog
               </Link>
-              <Link href="/about" style={{ color: '#ccc', textDecoration: 'none' }}>
+              <Link href="/about" style={{ color: 'white', textDecoration: 'none' }}>
                 • Hakkımızda
               </Link>
-              <Link href="/contact" style={{ color: '#ccc', textDecoration: 'none' }}>
+              <Link href="/contact" style={{ color: 'white', textDecoration: 'none' }}>
                 • İletişim
               </Link>
             </Box>
@@ -60,15 +60,15 @@ export default function Footer() {
               İletişim
             </Typography>
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, mt: 2 }}>
-              <Typography variant="body2" sx={{ color: '#ccc' }}>
+              <Typography variant="body2" sx={{ color: 'white' }}>
                 📞 0 (554) 259 72 73
               </Typography>
-              <Typography variant="body2" sx={{ color: '#ccc' }}>
-                <a href="mailto:tokatyonelotoyedekparca@gmail.com" style={{ color: '#ccc', textDecoration: 'none' }}>
+              <Typography variant="body2" sx={{ color: 'white' }}>
+                <a href="mailto:tokatyonelotoyedekparca@gmail.com" style={{ color: 'white', textDecoration: 'none' }}>
                   📧 tokatyonelotoyedekparca@gmail.com
                 </a>
               </Typography>
-              <Typography variant="body2" sx={{ color: '#ccc' }}>
+              <Typography variant="body2" sx={{ color: 'white' }}>
                 🕒 Pzt-Cmt: 08:00 - 18:00
               </Typography>
             </Box>
@@ -78,13 +78,13 @@ export default function Footer() {
         {/* Copyright */}
         <Box
           sx={{
-            borderTop: '1px solid #333',
+            borderTop: '1px solid rgba(255, 255, 255, 0.2)',
             mt: 4,
             pt: 3,
             textAlign: 'center',
           }}
         >
-          <Typography variant="body2" sx={{ color: '#999' }}>
+          <Typography variant="body2" sx={{ color: 'white' }}>
             © {new Date().getFullYear()} Yönel Oto Yedek Parça. Tüm hakları saklıdır.
           </Typography>
         </Box>
