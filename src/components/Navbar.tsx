@@ -74,87 +74,123 @@ export default function Navbar() {
     <>
       {/* Top Bar */}
       <Box sx={{ bgcolor: '#a80000', color: 'white', py: 1, display: { xs: 'none', md: 'block' } }}>
-        <Container maxWidth="lg">
-          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <Box sx={{ display: 'flex', gap: 3 }}>
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-                <PhoneIcon fontSize="small" />
-                <Typography variant="body2">0 (554) 259 72 73</Typography>
-              </Box>
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-                <EmailIcon fontSize="small" />
-                <Typography variant="body2" component="a" href="mailto:tokatyonelotoyedekparca@gmail.com" sx={{ color: 'inherit', textDecoration: 'none' }}>
-                  tokatyonelotoyedekparca@gmail.com
-                </Typography>
-              </Box>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', px: { xs: 2, sm: 3 } }}>
+          <Box sx={{ display: 'flex', gap: 3 }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+              <PhoneIcon fontSize="small" />
+              <Typography variant="body2">0 (554) 259 72 73</Typography>
             </Box>
-            <Typography variant="body2">Hemen İletişime Geç</Typography>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+              <EmailIcon fontSize="small" />
+              <Typography variant="body2" component="a" href="mailto:tokatyonelotoyedekparca@gmail.com" sx={{ color: 'inherit', textDecoration: 'none' }}>
+                tokatyonelotoyedekparca@gmail.com
+              </Typography>
+            </Box>
           </Box>
-        </Container>
+          <Typography variant="body2">Hemen İletişime Geç</Typography>
+        </Box>
       </Box>
 
       {/* Main Navbar */}
       <AppBar position="sticky" sx={{ bgcolor: 'white', color: 'black', zIndex: 1100 }} elevation={2}>
-        <Container maxWidth="lg">
-          <Toolbar disableGutters sx={{ minHeight: { xs: 64, sm: 80, md: 92 } }}>
-            {/* Logo - Optimized for performance */}
-            <Box sx={{ mr: { xs: 0, md: 4 }, flexShrink: 0 }}>
-              <Link href="/" style={{ textDecoration: 'none', display: 'block' }}>
-                <Box
-                  sx={{
-                    position: 'relative',
-                    height: { xs: 64, sm: 85, md: 120 },
-                    width: { xs: 140, sm: 200, md: 260 },
-                  }}
-                >
-                  <Image
-                    src="/assets/logo.jpg"
-                    alt="Yönel Oto Yedek Parça Logo"
-                    fill
-                    style={{ objectFit: 'cover' }}
-                    priority
-                    sizes="(max-width: 640px) 140px, (max-width: 768px) 200px, 260px"
-                  />
-                </Box>
-              </Link>
-            </Box>
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            minHeight: { xs: 64, sm: 80, md: 92 },
+            width: '100%',
+            pl: { xs: 0, sm: 0 },
+            pr: { xs: 2, sm: 3 },
+          }}
+        >
+          {/* Logo - Aligned to Absolute Left (No Padding) */}
+          <Box sx={{ flexShrink: 0 }}>
+            <Link href="/" style={{ textDecoration: 'none', display: 'block' }}>
+              <Box
+                sx={{
+                  position: 'relative',
+                  height: { xs: 64, sm: 85, md: 120 },
+                  width: { xs: 140, sm: 200, md: 260 },
+                }}
+              >
+                <Image
+                  src="/assets/logo.jpg"
+                  alt="Yönel Oto Yedek Parça Logo"
+                  fill
+                  style={{ objectFit: 'cover' }}
+                  priority
+                  sizes="(max-width: 640px) 140px, (max-width: 768px) 200px, 260px"
+                />
+              </Box>
+            </Link>
+          </Box>
 
-            {/* Desktop Menu */}
-            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, gap: 2, justifyContent: 'center' }}>
-              {menuItems.map((item) => (
-                <Button
-                  key={item.label}
-                  component={Link}
-                  href={item.href}
-                  sx={{ color: 'black', '&:hover': { color: '#a80000' } }}
-                >
-                  {item.label}
-                </Button>
-              ))}
-              {/* İletişim - Only on Desktop */}
+          {/* Spacer for Desktop - Pushes menu to center */}
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'block' } }} />
+
+          {/* Desktop Menu - Centered */}
+          <Box
+            sx={{
+              display: { xs: 'none', md: 'flex' },
+              gap: 2.5,
+              position: 'absolute',
+              left: '50%',
+              transform: 'translateX(-50%)',
+            }}
+          >
+            {menuItems.map((item) => (
               <Button
+                key={item.label}
                 component={Link}
-                href="/contact"
-                sx={{ color: 'black', '&:hover': { color: '#a80000' } }}
+                href={item.href}
+                sx={{
+                  color: 'black',
+                  fontSize: '1.125rem',
+                  fontWeight: 600,
+                  px: 2.5,
+                  py: 1.25,
+                  '&:hover': {
+                    color: '#a80000',
+                    backgroundColor: 'rgba(168, 0, 0, 0.05)',
+                  },
+                }}
               >
-                İletişim
+                {item.label}
               </Button>
-            </Box>
+            ))}
+            {/* İletişim - Only on Desktop */}
+            <Button
+              component={Link}
+              href="/contact"
+              sx={{
+                color: 'black',
+                fontSize: '1.125rem',
+                fontWeight: 600,
+                px: 2.5,
+                py: 1.25,
+                '&:hover': {
+                  color: '#a80000',
+                  backgroundColor: 'rgba(168, 0, 0, 0.05)',
+                },
+              }}
+            >
+              İletişim
+            </Button>
+          </Box>
 
-            {/* Modern Hamburger Menu Button */}
-            <Box sx={{ display: { xs: 'flex', md: 'none' }, ml: 'auto' }}>
-              <button
-                onClick={handleDrawerToggle}
-                className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-lg transition-all hover:bg-gray-100 active:scale-95"
-                aria-label="Toggle menu"
-              >
-                <span className="block h-0.5 w-6 rounded-full bg-gray-800" />
-                <span className="block h-0.5 w-6 rounded-full bg-gray-800" />
-                <span className="block h-0.5 w-6 rounded-full bg-gray-800" />
-              </button>
-            </Box>
-          </Toolbar>
-        </Container>
+          {/* Modern Hamburger Menu Button */}
+          <Box sx={{ display: { xs: 'flex', md: 'none' }, ml: 'auto' }}>
+            <button
+              onClick={handleDrawerToggle}
+              className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-lg transition-all hover:bg-gray-100 active:scale-95"
+              aria-label="Toggle menu"
+            >
+              <span className="block h-0.5 w-6 rounded-full bg-gray-800" />
+              <span className="block h-0.5 w-6 rounded-full bg-gray-800" />
+              <span className="block h-0.5 w-6 rounded-full bg-gray-800" />
+            </button>
+          </Box>
+        </Box>
       </AppBar>
 
       {/* Dropdown Menu (Top to Bottom) */}

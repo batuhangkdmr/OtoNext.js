@@ -64,10 +64,19 @@ export default function ContactPage() {
             </div>
           </div>
 
-          {/* Map or Image */}
+          {/* Map */}
           <div>
-            <div className="bg-gray-200 rounded-lg h-96 flex items-center justify-center">
-              <p className="text-gray-500">Harita buraya gelecek</p>
+            <div className="bg-gray-200 rounded-lg overflow-hidden h-96 shadow-lg">
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3041.3402615865457!2d36.54076967639911!3d40.334797260621315!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x407db7f558d93c95%3A0x84e40c2f96ec0062!2sY%C3%96NEL%20OTO%20YEDEK%20PAR%C3%87A!5e0!3m2!1sen!2str!4v1761330905264!5m2!1sen!2str" 
+                width="100%" 
+                height="100%" 
+                style={{ border: 0 }} 
+                allowFullScreen 
+                loading="lazy" 
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Yönel Oto Yedek Parça Konumu"
+              />
             </div>
           </div>
         </div>
