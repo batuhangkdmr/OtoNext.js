@@ -42,6 +42,9 @@ export default function Footer() {
               <Link href="/products" style={{ color: '#ccc', textDecoration: 'none' }}>
                 • Ürünler
               </Link>
+              <Link href="/blog" style={{ color: '#ccc', textDecoration: 'none' }}>
+                • Blog
+              </Link>
               <Link href="/about" style={{ color: '#ccc', textDecoration: 'none' }}>
                 • Hakkımızda
               </Link>

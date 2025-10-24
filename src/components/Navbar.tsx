@@ -32,20 +32,20 @@ const menuItems = [
     )
   },
   { 
+    label: 'Blog', 
+    href: '/blog',
+    icon: (
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="h-7 w-7">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z" />
+      </svg>
+    )
+  },
+  { 
     label: 'Hakkımızda', 
     href: '/about',
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="h-7 w-7">
         <path strokeLinecap="round" strokeLinejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
-      </svg>
-    )
-  },
-  { 
-    label: 'İletişim', 
-    href: '/contact',
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="h-7 w-7">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
       </svg>
     )
   },
@@ -94,7 +94,7 @@ export default function Navbar() {
       </Box>
 
       {/* Main Navbar */}
-      <AppBar position="sticky" sx={{ bgcolor: 'white', color: 'black' }} elevation={2}>
+      <AppBar position="sticky" sx={{ bgcolor: 'white', color: 'black', zIndex: 1100 }} elevation={2}>
         <Container maxWidth="lg">
           <Toolbar disableGutters sx={{ minHeight: { xs: 64, sm: 80, md: 92 } }}>
             {/* Logo - Optimized for performance */}
@@ -120,7 +120,7 @@ export default function Navbar() {
             </Box>
 
             {/* Desktop Menu */}
-            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, gap: 2 }}>
+            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, gap: 2, justifyContent: 'center' }}>
               {menuItems.map((item) => (
                 <Button
                   key={item.label}
@@ -131,6 +131,14 @@ export default function Navbar() {
                   {item.label}
                 </Button>
               ))}
+              {/* İletişim - Only on Desktop */}
+              <Button
+                component={Link}
+                href="/contact"
+                sx={{ color: 'black', '&:hover': { color: '#a80000' } }}
+              >
+                İletişim
+              </Button>
             </Box>
 
             {/* Modern Hamburger Menu Button */}
@@ -149,32 +157,29 @@ export default function Navbar() {
         </Container>
       </AppBar>
 
-      {/* Bottom Sheet Menu (Instagram Style) */}
+      {/* Dropdown Menu (Top to Bottom) */}
       {mobileOpen && (
         <>
           {/* Backdrop Overlay */}
           <div
-            className="fixed inset-0 z-40 bg-black/50 transition-opacity duration-300 md:hidden"
+            className="fixed inset-0 bg-black/50 transition-opacity duration-300 md:hidden"
             onClick={handleDrawerToggle}
             style={{
               animation: 'fadeIn 0.3s ease-out',
+              zIndex: 1150,
             }}
           />
 
-          {/* Bottom Sheet Content - Slides from Bottom */}
+          {/* Menu Content - Slides from Top (Full Screen) */}
           <div
-            className="fixed bottom-0 left-0 right-0 z-50 max-h-[85vh] overflow-y-auto rounded-t-3xl bg-white shadow-2xl md:hidden"
+            className="fixed inset-0 flex flex-col bg-white md:hidden"
             style={{
-              animation: 'slideUp 0.3s ease-out',
+              animation: 'slideDown 0.3s ease-out',
+              zIndex: 1200,
             }}
           >
-            {/* Handle Bar (Swipe Indicator) */}
-            <div className="flex justify-center pb-3 pt-4">
-              <div className="h-1 w-12 rounded-full bg-gray-300" />
-            </div>
-
             {/* Header with Close Button */}
-            <div className="flex items-center justify-between px-6 pb-4">
+            <div className="flex flex-shrink-0 items-center justify-between border-b border-gray-100 px-6 py-5">
               <h2 className="text-lg font-bold text-gray-800">Menü</h2>
               <button
                 onClick={handleDrawerToggle}
@@ -198,37 +203,39 @@ export default function Navbar() {
               </button>
             </div>
 
-            {/* Navigation Links Grid */}
-            <nav className="grid grid-cols-2 gap-3 px-6 pb-6">
-              {menuItems.map((item, index) => (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  onClick={handleDrawerToggle}
-                  className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 p-6 text-center transition-all hover:shadow-lg active:scale-95"
-                  style={{
-                    animation: `scaleIn 0.3s ease-out ${index * 0.05}s both`,
-                  }}
-                >
-                  {/* Icon Circle with Custom Icon */}
-                  <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-full bg-white shadow-sm text-red-600 transition-all group-hover:bg-red-50 group-hover:scale-110">
-                    {item.icon}
-                  </div>
-                  <span className="block text-sm font-semibold text-gray-800 transition-colors group-hover:text-red-600">
-                    {item.label}
-                  </span>
-                </Link>
-              ))}
-            </nav>
+            {/* Scrollable Content Area */}
+            <div className="flex-1 overflow-y-auto">
+              {/* Navigation Links Grid */}
+              <nav className="grid grid-cols-2 gap-3 p-6">
+                {menuItems.map((item, index) => (
+                  <Link
+                    key={item.label}
+                    href={item.href}
+                    onClick={handleDrawerToggle}
+                    className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 p-6 text-center transition-all hover:shadow-lg active:scale-95"
+                    style={{
+                      animation: `scaleIn 0.3s ease-out ${index * 0.05}s both`,
+                    }}
+                  >
+                    {/* Icon Circle with Custom Icon */}
+                    <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-full bg-white shadow-sm text-red-600 transition-all group-hover:bg-red-50 group-hover:scale-110">
+                      {item.icon}
+                    </div>
+                    <span className="block text-sm font-semibold text-gray-800 transition-colors group-hover:text-red-600">
+                      {item.label}
+                    </span>
+                  </Link>
+                ))}
+              </nav>
+            </div>
 
-            {/* Divider */}
-            <div className="mx-6 my-2 border-t border-gray-200" />
-
-            {/* Contact Cards */}
-            <div className="px-6 pb-6">
-              <h3 className="mb-3 text-xs font-semibold uppercase tracking-wider text-gray-500">
-                İletişim
-              </h3>
+            {/* Contact Cards Footer */}
+            <div className="flex-shrink-0 border-t border-gray-100 bg-gray-50 px-6 py-4">
+              <Link href="/contact" onClick={handleDrawerToggle}>
+                <h3 className="mb-3 cursor-pointer text-xs font-semibold uppercase tracking-wider text-gray-500 transition-colors hover:text-red-600">
+                  İletişim Sayfasına Gitmek İçin Tıklayınız →
+                </h3>
+              </Link>
               <div className="space-y-2">
                 <a
                   href="tel:05542597273"
@@ -243,22 +250,39 @@ export default function Navbar() {
                   </div>
                 </a>
                 <a
-                  href="mailto:tokatyonelotoyedekparca@gmail.com"
-                  className="flex items-center gap-4 rounded-xl bg-gradient-to-r from-blue-50 to-cyan-50 p-4 transition-all hover:shadow-md active:scale-[0.98]"
+                  href="https://www.google.com/maps/@40.3346533,36.5433212,3a,75y,0.92h,72.02t/data=!3m7!1e1!3m5!1sqCsKf6En5-dRJF7Jw9kEaw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D17.975763389466422%26panoid%3DqCsKf6En5-dRJF7Jw9kEaw%26yaw%3D0.9187446217123583!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI1MTAyMC4wIKXMDSoASAFQAw%3D%3D"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-4 rounded-xl bg-gradient-to-r from-green-50 to-emerald-50 p-4 transition-all hover:shadow-md active:scale-[0.98]"
                 >
                   <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-white shadow-sm">
-                    <EmailIcon className="text-blue-600" />
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={2}
+                      stroke="currentColor"
+                      className="h-6 w-6 text-green-600"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"
+                      />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
+                      />
+                    </svg>
                   </div>
                   <div className="flex flex-col">
-                    <span className="text-xs font-medium text-gray-600">E-posta</span>
-                    <span className="text-sm font-bold text-gray-800">Email Gönder</span>
+                    <span className="text-xs font-medium text-gray-600">Konum</span>
+                    <span className="text-sm font-bold text-gray-800">Haritada Görüntüle</span>
                   </div>
                 </a>
               </div>
             </div>
-
-            {/* Safe Area for iOS */}
-            <div className="h-6" />
           </div>
 
           {/* Custom CSS Animations */}
@@ -271,9 +295,9 @@ export default function Navbar() {
                 opacity: 1;
               }
             }
-            @keyframes slideUp {
+            @keyframes slideDown {
               from {
-                transform: translateY(100%);
+                transform: translateY(-100%);
               }
               to {
                 transform: translateY(0);
