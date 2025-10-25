@@ -1119,10 +1119,10 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
                   __html: (() => {
                     let html = post.content;
                     
-                    // Başlıklar
-                    html = html.replace(/^# (.+)$/gm, '<h1>$1</h1>');
-                    html = html.replace(/^## (.+)$/gm, '<h2>$1</h2>');
-                    html = html.replace(/^### (.+)$/gm, '<h3>$1</h3>');
+                    // Başlıklar (SEO: Markdown # → H2 (sayfa zaten H1'e sahip))
+                    html = html.replace(/^# (.+)$/gm, '<h2>$1</h2>');
+                    html = html.replace(/^## (.+)$/gm, '<h3>$1</h3>');
+                    html = html.replace(/^### (.+)$/gm, '<h4>$1</h4>');
                     
                     // Bold
                     html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
@@ -1215,7 +1215,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
                   📞 Hemen Arayın
                 </a>
                 <Link
-                  href="/products"
+                  href="/urunler"
                   className="bg-transparent border-2 border-white px-6 py-3 rounded-lg font-bold hover:bg-white hover:text-primary transition-colors text-center"
                 >
                   🛒 Ürünleri İnceleyin

@@ -9,9 +9,9 @@ import Newsletter from '@/components/Newsletter';
 
   // Advanced SEO Optimized Metadata
 export const metadata: Metadata = {
-  title: 'Yönel Oto Yedek Parça | İveco Daily 120-14, 85-12, 65-9, Eurobus | Fiat Ducato | Foton & Karataş Traktör | Mutlu Akü - Orijinal Yedek Parça',
-  description: 'İveco Daily 120-14, 85-12, 65-9, 50NC, Eurobus yedek parça. Fiat Ducato 2.3, 3.0 motor parçaları. Foton ve Karataş traktör yedek parça. Mutlu akü çeşitleri. 50+ yıllık tecrübe, orijinal parça garantisi, Türkiye geneli hızlı kargo. Fren balata, filtre, motor parçası stoklarımızda.',
-  keywords: 'iveco daily yedek parça, iveco 120-14 yedek parça, iveco 85-12 parça, iveco 65-9, iveco 50nc, iveco eurobus, iveco daily eurobus, iveco daily 4x4, fiat ducato yedek parça, ducato 2.3 motor, ducato 3.0, ducato fren balata, iveco fren sistemi, foton traktör yedek parça, foton filtre, karataş traktör parça, karataş hidrolik, mutlu akü, mutlu akü fiyat, ağır hizmet akü, traktör aküsü, iveco filtre, ducato yağ filtresi, ticari araç yedek parça, orijinal yedek parça, tokat yedek parça',
+  title: 'Yönel Oto Yedek Parça | İveco Daily, Ducato, Foton Traktör',
+  description: 'İveco Daily, Fiat Ducato, Foton ve Karataş traktör yedek parça. Mutlu akü, fren, motor, filtre. 50+ yıl tecrübe, orijinal ürün garantisi.',
+  keywords: 'iveco daily yedek parça, iveco 120-14, iveco 85-12, iveco 65-9, iveco eurobus, fiat ducato yedek parça, foton traktör, karataş traktör, mutlu akü, orijinal yedek parça, tokat',
   alternates: {
     canonical: 'https://yonelotoyedekparca.com',
   },
@@ -28,8 +28,8 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Yönel Oto Yedek Parça | İveco Daily, Fiat Ducato, Foton, Karataş Traktör, Mutlu Akü',
-    description: 'İveco Daily 120-14, 85-12, 65-9, Fiat Ducato, Foton ve Karataş traktör yedek parçaları. 50+ yıllık tecrübe, %100 orijinal ürün garantisi. Fren, motor, filtre sistemleri.',
+    title: 'Yönel Oto Yedek Parça | İveco Daily, Ducato, Foton Traktör',
+    description: 'İveco Daily, Fiat Ducato, Foton ve Karataş traktör yedek parçaları. 50+ yıl tecrübe, orijinal ürün garantisi. Tokat.',
     url: 'https://yonelotoyedekparca.com',
     siteName: 'Yönel Oto Yedek Parça',
     locale: 'tr_TR',
@@ -75,7 +75,7 @@ export default async function Home() {
       icon: '🚐',
       image: '/assets/dailly.png',
       description: 'İveco Daily serisi için orijinal yedek parçalar',
-      link: '/products?search=iveco',
+      link: '/urunler?search=iveco',
     },
     {
       name: 'Fiat Ducato',
@@ -83,7 +83,7 @@ export default async function Home() {
       icon: '🚚',
       image: '/assets/d.png',
       description: 'Fiat Ducato ticari araç yedek parçaları',
-      link: '/products?search=ducato',
+      link: '/urunler?search=ducato',
     },
     {
       name: 'Karataş Traktör',
@@ -91,7 +91,7 @@ export default async function Home() {
       icon: '🚜',
       image: '/assets/karat.png',
       description: 'Karataş traktör yedek parça ve aksesuar çeşitleri',
-      link: '/products?search=karataş',
+      link: '/urunler?search=karataş',
     },
     {
       name: 'Foton Traktör',
@@ -99,7 +99,7 @@ export default async function Home() {
       icon: '🚜',
       image: '/assets/foton.png',
       description: 'Foton traktör yedek parçaları ve bakım ürünleri',
-      link: '/products?search=foton',
+      link: '/urunler?search=foton',
     },
     {
       name: 'Mutlu Akü',
@@ -107,7 +107,7 @@ export default async function Home() {
       icon: '🔋',
       image: '/images/60aku.png',
       description: 'Mutlu akü çeşitleri, güvenilir enerji çözümleri',
-      link: '/products?search=mutlu',
+      link: '/urunler?search=mutlu',
     },
   ];
 
@@ -596,7 +596,7 @@ export default async function Home() {
 
               {/* Contact Page Button */}
               <Link
-                href="/contact"
+                href="/iletisim"
                 className="group bg-white text-gray-900 rounded-2xl p-8 text-center hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-3xl relative overflow-hidden"
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
