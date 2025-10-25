@@ -1,0 +1,72 @@
+
+> yonel-nextjs@0.1.0 build
+> next build
+
+  ▲ Next.js 14.2.33
+  - Environments: .env.local
+
+   Creating an optimized production build ...
+(node:95089) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ Compiled successfully
+   Linting and checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/23) ...
+ ⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+ ⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+ ⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+ ⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+ ⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+ ⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+ ⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+   Generating static pages (5/23) 
+   Generating static pages (11/23) 
+   Generating static pages (17/23) 
+✅ SQL Server bağlantısı başarılı!
+✅ SQL Server bağlantısı başarılı!
+✅ SQL Server bağlantısı başarılı!
+✅ SQL Server bağlantısı başarılı!
+✅ SQL Server bağlantısı başarılı!
+✅ SQL Server bağlantısı başarılı!
+✅ SQL Server bağlantısı başarılı!
+✅ SQL Server bağlantısı başarılı!
+✅ SQL Server bağlantısı başarılı!
+✅ SQL Server bağlantısı başarılı!
+✅ SQL Server bağlantısı başarılı!
+✅ SQL Server bağlantısı başarılı!
+ ✓ Generating static pages (23/23)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                                         Size     First Load JS
+┌ ○ /                                               7.51 kB         109 kB
+├ ○ /_not-found                                     880 B          88.3 kB
+├ ○ /about                                          1.93 kB         124 kB
+├ ○ /admin                                          296 B          96.4 kB
+├ ○ /admin/categories                               3.61 kB         133 kB
+├ ○ /admin/products                                 4.63 kB         137 kB
+├ ○ /admin/products/create                          2.34 kB         157 kB
+├ ƒ /admin/products/edit/[id]                       2.34 kB         157 kB
+├ ○ /admin/sliders                                  1.66 kB         133 kB
+├ ○ /auth/login                                     928 B          88.3 kB
+├ ○ /blog                                           606 B           128 kB
+├ ● /blog/[slug]                                    1 kB            128 kB
+├   ├ /blog/iveco-daily-yedek-parca-secimi-rehberi
+├   ├ /blog/fiat-ducato-motor-bakimi-ipuclari
+├   ├ /blog/foton-traktor-yedek-parca-temini
+├   └ [+6 more paths]
+├ ○ /contact                                        138 B          87.6 kB
+├ ƒ /products                                       19.4 kB         188 kB
+└ ƒ /products/[slug]                                616 B           135 kB
++ First Load JS shared by all                       87.4 kB
+  ├ chunks/117-3791b1d0a70d7465.js                  31.9 kB
+  ├ chunks/fd9d1056-0ca7524c1b5161c7.js             53.7 kB
+  └ other shared chunks (total)                     1.89 kB
+
+
+ƒ Middleware                                        32.3 kB
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses getStaticProps)
+ƒ  (Dynamic)  server-rendered on demand
+

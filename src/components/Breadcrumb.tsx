@@ -24,8 +24,45 @@ export default function Breadcrumb({ items, currentPage }: Props) {
   // Eğer custom items verilmemişse, pathname'den otomatik oluştur
   const breadcrumbItems = items || generateBreadcrumbs(pathname);
 
+  // Schema.org BreadcrumbList structured data
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Ana Sayfa',
+        item: 'https://yonelotoyedekparca.com/',
+      },
+      ...breadcrumbItems.map((item, index) => ({
+        '@type': 'ListItem',
+        position: index + 2,
+        name: item.label,
+        item: item.href ? `https://yonelotoyedekparca.com${item.href}` : undefined,
+      })),
+    ],
+  };
+
+  // Add current page if provided
+  if (currentPage) {
+    breadcrumbSchema.itemListElement.push({
+      '@type': 'ListItem',
+      position: breadcrumbItems.length + 2,
+      name: currentPage,
+      item: undefined,
+    });
+  }
+
   return (
-    <Box sx={{ mb: 3, py: 2 }}>
+    <>
+      {/* Breadcrumb Schema.org JSON-LD */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      
+      <Box sx={{ mb: 3, py: 2 }}>
       <Breadcrumbs
         separator={<NavigateNextIcon fontSize="small" />}
         aria-label="breadcrumb"
@@ -91,6 +128,7 @@ export default function Breadcrumb({ items, currentPage }: Props) {
         )}
       </Breadcrumbs>
     </Box>
+    </>
   );
 }
 
@@ -101,8 +139,11 @@ function generateBreadcrumbs(pathname: string): BreadcrumbItem[] {
 
   const pathMap: Record<string, string> = {
     products: 'Ürünler',
+    urunler: 'Ürünler',
     about: 'Hakkımızda',
+    hakkimizda: 'Hakkımızda',
     contact: 'İletişim',
+    iletisim: 'İletişim',
     blog: 'Blog',
     admin: 'Admin Panel',
     categories: 'Kategoriler',

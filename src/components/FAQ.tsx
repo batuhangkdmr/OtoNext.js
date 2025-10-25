@@ -36,10 +36,31 @@ export default function FAQ() {
     setOpenIndex(openIndex === index ? null : index);
   };
 
+  // FAQ Schema.org structured data
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
+  };
+
   return (
-    <section className="py-20 bg-white">
-      <div className="container mx-auto px-4">
-        <div className="max-w-4xl mx-auto">
+    <>
+      {/* FAQ Schema.org JSON-LD */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
           {/* Header */}
           <div className="text-center mb-16">
             <div className="inline-block bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-semibold mb-4">
@@ -117,6 +138,7 @@ export default function FAQ() {
         </div>
       </div>
     </section>
+    </>
   );
 }
 
