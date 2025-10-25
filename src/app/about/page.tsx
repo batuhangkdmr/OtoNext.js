@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Hakkımızda - Yönel Oto Yedek Parça | 50+ Yıllık Tecrübe',
     description: '1970\'den beri İveco, Ducato, Foton ve Karataş Traktör yedek parçaları. Tokat merkezli, Türkiye geneline hizmet.',
-    url: 'https://yonelotoyedekparca.com/about',
+    url: 'https://yonelotoyedekparca.com/hakkimizda',
     type: 'website',
     locale: 'tr_TR',
   },
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     description: '50+ yıllık tecrübe ile yedek parça sektöründe lider',
   },
   alternates: {
-    canonical: 'https://yonelotoyedekparca.com/about',
+    canonical: 'https://yonelotoyedekparca.com/hakkimizda',
   },
 };
 
@@ -587,7 +587,7 @@ export default function AboutPage() {
                 Hemen Arayın
               </a>
               <Link
-                href="/products"
+                href="/urunler"
                 className="inline-flex items-center justify-center bg-white text-primary border-2 border-primary px-8 py-4 rounded-lg font-bold text-lg hover:bg-primary hover:text-white transition-all shadow-lg hover:scale-105"
               >
                 Ürünleri İnceleyin

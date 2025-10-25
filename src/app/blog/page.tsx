@@ -8,15 +8,29 @@ import PersonIcon from '@mui/icons-material/Person';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 export const metadata: Metadata = {
-  title: 'Blog - Yedek Parça Rehberi ve Bakım İpuçları | Yönel Oto Yedek Parça',
-  description: 'İveco Daily, Fiat Ducato, Foton, Karataş Traktör yedek parça bakımı, onarımı ve seçimi hakkında uzman tavsiyeleri. 50+ yıllık tecrübemizle en güncel bilgiler.',
+  title: 'Blog | Yedek Parça Rehberi ve Bakım İpuçları - Yönel Oto',
+  description: 'İveco Daily, Ducato, Foton, Karataş traktör bakım ve onarım rehberleri. 50+ yıl tecrübe ile hazırlanmış uzman tavsiyeleri.',
   keywords: 'iveco daily bakım, ducato yedek parça rehberi, foton traktör bakım ipuçları, karataş traktör onarım, mutlu akü bakımı, yedek parça seçimi, orijinal parça, yan sanayi parça',
   openGraph: {
-    title: 'Yedek Parça Blog | Yönel Oto',
-    description: 'İveco, Ducato, Foton ve Karataş için profesyonel yedek parça rehberleri',
+    title: 'Blog | Yedek Parça Rehberi - Yönel Oto',
+    description: 'İveco, Ducato, Foton ve Karataş için profesyonel yedek parça rehberleri. 50+ yıl tecrübe.',
     url: 'https://yonelotoyedekparca.com/blog',
     type: 'website',
     locale: 'tr_TR',
+    images: [
+      {
+        url: '/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Yönel Oto Yedek Parça Blog',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Blog | Yedek Parça Rehberi',
+    description: 'İveco, Ducato, Foton ve Karataş bakım rehberleri',
+    images: ['/twitter-image.jpg'],
   },
   alternates: {
     canonical: 'https://yonelotoyedekparca.com/blog',
@@ -382,7 +396,7 @@ export default function BlogPage() {
                 📞 Hemen Arayın
               </a>
               <Link
-                href="/products"
+                href="/urunler"
                 className="inline-flex items-center justify-center bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:text-primary transition-all shadow-lg hover:scale-105"
               >
                 🛒 Ürünleri İnceleyin

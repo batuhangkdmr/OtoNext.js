@@ -70,6 +70,28 @@ const nextConfig = {
   
   // Power by başlığını kaldır
   poweredByHeader: false,
+  
+  // SEO için Türkçe URL rewrites
+  async rewrites() {
+    return [
+      {
+        source: '/hakkimizda',
+        destination: '/about',
+      },
+      {
+        source: '/urunler',
+        destination: '/products',
+      },
+      {
+        source: '/urunler/:slug',
+        destination: '/products/:slug',
+      },
+      {
+        source: '/iletisim',
+        destination: '/contact',
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;

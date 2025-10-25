@@ -17,18 +17,14 @@ Disallow: /login
 Disallow: /register
 
 # Allow important pages
-Allow: /products
-Allow: /about
-Allow: /contact
+Allow: /urunler
+Allow: /hakkimizda
+Allow: /iletisim
+Allow: /blog
 Allow: /hizmet-bolgelerimiz
 
-# Allow Iveco Daily specific searches
-Allow: /products?search=iveco*
-Allow: /products?search=daily*
-Allow: /products?search=120-14*
-Allow: /products?search=85-12*
-Allow: /products?search=65-9*
-Allow: /products?search=50nc*
+# Allow category pages
+Allow: /urunler?categoryId=*
 
 # Mobile specific
 User-agent: Googlebot-Mobile

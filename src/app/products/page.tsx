@@ -21,8 +21,32 @@ export const revalidate = 0;
 
 export const metadata: Metadata = {
   title: 'Ürünler | Yönel Oto Yedek Parça - İveco, Ducato, Foton, Karataş',
-  description: 'İveco Daily, Fiat Ducato, Foton traktör, Karataş traktör yedek parçaları ve Mutlu akü ürünlerimizi inceleyin. Orijinal yedek parça, hızlı teslimat.',
-  keywords: 'yedek parça, iveco daily, fiat ducato, foton traktör, karataş traktör, mutlu akü, oto yedek parça',
+  description: 'İveco Daily, Fiat Ducato, Foton traktör, Karataş traktör yedek parçaları ve Mutlu akü. 5000+ ürün çeşidi. Orijinal ve yan sanayi. Hızlı kargo.',
+  keywords: 'yedek parça, iveco daily, fiat ducato, foton traktör, karataş traktör, mutlu akü, oto yedek parça, tokat',
+  openGraph: {
+    title: 'Ürünlerimiz - Yönel Oto Yedek Parça',
+    description: 'İveco Daily, Ducato, Foton ve Karataş traktör yedek parçaları. 5000+ ürün çeşidi. Türkiye geneli kargo.',
+    url: 'https://yonelotoyedekparca.com/urunler',
+    type: 'website',
+    locale: 'tr_TR',
+    images: [
+      {
+        url: '/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Yönel Oto Yedek Parça Ürünleri',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Ürünlerimiz - Yönel Oto',
+    description: 'İveco, Ducato, Foton, Karataş yedek parça. 5000+ ürün.',
+    images: ['/twitter-image.jpg'],
+  },
+  alternates: {
+    canonical: 'https://yonelotoyedekparca.com/urunler',
+  },
 };
 
 interface PageProps {

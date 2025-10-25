@@ -39,16 +39,16 @@ export default function Footer() {
               <Link href="/" style={{ color: 'white', textDecoration: 'none' }}>
                 • Ana Sayfa
               </Link>
-              <Link href="/products" style={{ color: 'white', textDecoration: 'none' }}>
+              <Link href="/urunler" style={{ color: 'white', textDecoration: 'none' }}>
                 • Ürünler
               </Link>
               <Link href="/blog" style={{ color: 'white', textDecoration: 'none' }}>
                 • Blog
               </Link>
-              <Link href="/about" style={{ color: 'white', textDecoration: 'none' }}>
+              <Link href="/hakkimizda" style={{ color: 'white', textDecoration: 'none' }}>
                 • Hakkımızda
               </Link>
-              <Link href="/contact" style={{ color: 'white', textDecoration: 'none' }}>
+              <Link href="/iletisim" style={{ color: 'white', textDecoration: 'none' }}>
                 • İletişim
               </Link>
             </Box>
