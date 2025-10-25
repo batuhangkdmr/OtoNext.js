@@ -4,6 +4,9 @@ import Paper from '@mui/material/Paper';
 import CategoriesRepository from '@/lib/repositories/CategoriesRepository';
 import ProductForm from '../ProductForm';
 
+// Force dynamic rendering to avoid build-time database connection
+export const dynamic = 'force-dynamic';
+
 export default async function CreateProductPage() {
   const categories = await CategoriesRepository.findAll();
 

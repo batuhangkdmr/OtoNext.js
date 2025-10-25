@@ -6,6 +6,9 @@ import ProductsRepository from '@/lib/repositories/ProductsRepository';
 import CategoriesRepository from '@/lib/repositories/CategoriesRepository';
 import ProductForm from '../../ProductForm';
 
+// Force dynamic rendering to avoid build-time database connection
+export const dynamic = 'force-dynamic';
+
 interface PageProps {
   params: {
     id: string;

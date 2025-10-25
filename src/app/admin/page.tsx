@@ -4,6 +4,9 @@ import CategoriesRepository from '@/lib/repositories/CategoriesRepository';
 import SliderImagesRepository from '@/lib/repositories/SliderImagesRepository';
 import { logout } from '../auth/actions';
 
+// Force dynamic rendering to avoid build-time database connection
+export const dynamic = 'force-dynamic';
+
 export default async function AdminDashboard() {
   // Get counts
   const { total: productsCount } = await ProductsRepository.findAll({ limit: 1 });

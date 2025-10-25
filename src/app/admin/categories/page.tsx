@@ -9,6 +9,9 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Paper from '@mui/material/Paper';
 
+// Force dynamic rendering to avoid build-time database connection
+export const dynamic = 'force-dynamic';
+
 export default async function AdminCategoriesPage() {
   const categories = await CategoriesRepository.findAll();
 

@@ -6,6 +6,7 @@ import Footer from '@/components/Footer';
 import WhatsAppFloatButton from '@/components/WhatsAppFloatButton';
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://yonelotoyedekparca.com'),
   title: 'Yönel Oto Yedek Parça | Foton, Karataş, Iveco, Mutlu Akü',
   description: 'Foton traktör yedek parçaları, Iveco Daily, Karataş traktör, Ducato yedek parça ve Mutlu akü satışında Türkiye\'nin güvenilir adresi.',
   keywords: 'foton yedek parça, iveco daily yedek parça, karataş traktör, mutlu akü, ducato yedek parça',

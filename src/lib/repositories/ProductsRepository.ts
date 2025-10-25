@@ -9,11 +9,13 @@ class ProductsRepository {
     search?: string;
     categoryId?: number;
     subCategory?: string;
+    sort?: string;
   }): Promise<{ products: Product[]; total: number }> {
     const pool = await getConnection();
     const page = params?.page || 1;
     const limit = params?.limit || 30;
     const offset = (page - 1) * limit;
+    const sort = params?.sort || 'newest';
 
     let queryStr = `
       SELECT 
@@ -34,8 +36,10 @@ class ProductsRepository {
       request.input('search', sql.NVarChar, params.search);
     }
 
+    // Kategori filtreleme - HEM CategoryId HEM SubCategoryId alanlarında ara
+    // Böylece ana kategori veya alt kategori fark etmez, her ikisinde de bulur
     if (params?.categoryId) {
-      queryStr += ` AND p.CategoryId = @categoryId`;
+      queryStr += ` AND (p.CategoryId = @categoryId OR p.SubCategoryId = @categoryId)`;
       request.input('categoryId', sql.Int, params.categoryId);
     }
 
@@ -49,8 +53,26 @@ class ProductsRepository {
     const countResult = await request.query(countQuery);
     const total = countResult.recordset[0].Total;
 
+    // Add sorting
+    let orderBy = 'p.CreatedAt DESC'; // Default: newest
+    switch (sort) {
+      case 'oldest':
+        orderBy = 'p.CreatedAt ASC';
+        break;
+      case 'name-asc':
+        orderBy = 'p.Name ASC';
+        break;
+      case 'name-desc':
+        orderBy = 'p.Name DESC';
+        break;
+      case 'newest':
+      default:
+        orderBy = 'p.CreatedAt DESC';
+        break;
+    }
+
     // Get products with pagination
-    queryStr += ` ORDER BY p.CreatedAt DESC OFFSET @offset ROWS FETCH NEXT @limit ROWS ONLY`;
+    queryStr += ` ORDER BY ${orderBy} OFFSET @offset ROWS FETCH NEXT @limit ROWS ONLY`;
     request.input('offset', sql.Int, offset);
     request.input('limit', sql.Int, limit);
 

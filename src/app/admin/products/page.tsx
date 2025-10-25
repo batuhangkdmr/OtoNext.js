@@ -7,6 +7,9 @@ import AddIcon from '@mui/icons-material/Add';
 import ProductsRepository from '@/lib/repositories/ProductsRepository';
 import ProductsTable from './ProductsTable';
 
+// Force dynamic rendering to avoid build-time database connection
+export const dynamic = 'force-dynamic';
+
 export default async function AdminProductsPage() {
   const { products } = await ProductsRepository.findAll({ limit: 100 });
 
