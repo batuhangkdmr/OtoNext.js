@@ -12,7 +12,7 @@ const slides = [
     description: 'Orijinal ve yan sanayi yedek parçaları stoklarımızda',
     image: '/assets/slider1.png',
     buttonText: 'İveco Ürünleri',
-    buttonLink: '/products?search=iveco',
+    buttonLink: '/urunler?search=iveco',
   },
   {
     id: 2,
@@ -21,7 +21,7 @@ const slides = [
     description: 'Fren, motor, filtre sistemlerinde uzman çözümler',
     image: '/assets/slider2.png',
     buttonText: 'Ducato Ürünleri',
-    buttonLink: '/products?search=ducato',
+    buttonLink: '/urunler?search=ducato',
   },
   {
     id: 3,
@@ -30,7 +30,7 @@ const slides = [
     description: 'Tarımda kesintisiz üretim için güvenilir parçalar',
     image: '/assets/slider3.png',
     buttonText: 'Traktör Parçaları',
-    buttonLink: '/products?search=traktör',
+    buttonLink: '/urunler?search=traktör',
   },
   {
     id: 4,
@@ -39,7 +39,7 @@ const slides = [
     description: 'Motor, fren, filtre ve akü çözümlerinde uzman kadro',
     image: '/gorsel.png',
     buttonText: 'Tüm Ürünler',
-    buttonLink: '/products',
+    buttonLink: '/urunler',
   },
   {
     id: 5,
@@ -48,7 +48,7 @@ const slides = [
     description: 'Araç ve traktörleriniz için en kaliteli bakım malzemeleri',
     image: '/gorsel1.png',
     buttonText: 'Ürünleri İncele',
-    buttonLink: '/products',
+    buttonLink: '/urunler',
   },
 ];
 
@@ -100,9 +100,9 @@ export default function HeroSlider() {
           {/* Content */}
           <div className="relative z-10 container mx-auto px-4 h-full flex items-center">
             <div className="max-w-3xl text-white">
-              <h1 className="text-4xl md:text-6xl font-bold mb-4 animate-fade-in">
+              <h2 className="text-4xl md:text-6xl font-bold mb-4 animate-fade-in">
                 {slide.title}
-              </h1>
+              </h2>
               <p className="text-2xl md:text-3xl text-yellow-300 mb-4 font-semibold">
                 {slide.subtitle}
               </p>

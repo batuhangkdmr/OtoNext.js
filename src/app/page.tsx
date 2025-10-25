@@ -75,7 +75,7 @@ export default async function Home() {
       icon: '🚐',
       image: '/assets/dailly.png',
       description: 'İveco Daily serisi için orijinal yedek parçalar',
-      link: '/urunler?search=iveco',
+      link: '/urunler?categoryId=17',
     },
     {
       name: 'Fiat Ducato',
@@ -83,7 +83,7 @@ export default async function Home() {
       icon: '🚚',
       image: '/assets/d.png',
       description: 'Fiat Ducato ticari araç yedek parçaları',
-      link: '/urunler?search=ducato',
+      link: '/urunler?categoryId=55',
     },
     {
       name: 'Karataş Traktör',
@@ -91,7 +91,7 @@ export default async function Home() {
       icon: '🚜',
       image: '/assets/karat.png',
       description: 'Karataş traktör yedek parça ve aksesuar çeşitleri',
-      link: '/urunler?search=karataş',
+      link: '/urunler?categoryId=45',
     },
     {
       name: 'Foton Traktör',
@@ -99,7 +99,7 @@ export default async function Home() {
       icon: '🚜',
       image: '/assets/foton.png',
       description: 'Foton traktör yedek parçaları ve bakım ürünleri',
-      link: '/urunler?search=foton',
+      link: '/urunler?categoryId=34',
     },
     {
       name: 'Mutlu Akü',
@@ -107,7 +107,7 @@ export default async function Home() {
       icon: '🔋',
       image: '/images/60aku.png',
       description: 'Mutlu akü çeşitleri, güvenilir enerji çözümleri',
-      link: '/urunler?search=mutlu',
+      link: '/urunler?categoryId=36',
     },
   ];
 
@@ -387,10 +387,16 @@ export default async function Home() {
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-            {['120-14', '85-12', '65-9', '50NC', 'Daily 4x4'].map((model) => (
+            {[
+              { model: '120-14', categoryId: 22 },
+              { model: '85-12', categoryId: 23 },
+              { model: '65-9', categoryId: 24 },
+              { model: '50NC', categoryId: 25 },
+              { model: 'Daily 4x4', categoryId: 17 },
+            ].map(({ model, categoryId }) => (
               <Link
                 key={model}
-                href={`/urunler?search=iveco ${model.toLowerCase()}`}
+                href={`/urunler?categoryId=${categoryId}`}
                 className="group bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 p-6 text-center border-2 border-transparent hover:border-primary"
               >
                 <div className="text-4xl mb-3">🚐</div>
@@ -495,7 +501,7 @@ export default async function Home() {
 
             <div className="text-center mt-12">
               <Link
-                href="/urunler?search=iveco"
+                href="/urunler?categoryId=17"
                 className="inline-block bg-primary text-white px-10 py-4 rounded-lg font-bold text-lg hover:bg-red-700 hover:scale-105 transition-all shadow-lg"
               >
                 Tüm İveco Ürünlerini Görüntüle

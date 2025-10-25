@@ -77,25 +77,25 @@ export default function NotFound() {
           <p className="text-sm text-gray-500 mb-4">Popüler Sayfalar:</p>
           <div className="flex flex-wrap gap-3 justify-center">
             <Link
-              href="/products?search=iveco"
+              href="/urunler?categoryId=17"
               className="text-sm bg-gray-50 hover:bg-primary hover:text-white text-gray-700 px-4 py-2 rounded-full transition-all"
             >
               İveco Daily
             </Link>
             <Link
-              href="/products?search=ducato"
+              href="/urunler?categoryId=55"
               className="text-sm bg-gray-50 hover:bg-primary hover:text-white text-gray-700 px-4 py-2 rounded-full transition-all"
             >
               Fiat Ducato
             </Link>
             <Link
-              href="/products?search=foton"
+              href="/urunler?categoryId=34"
               className="text-sm bg-gray-50 hover:bg-primary hover:text-white text-gray-700 px-4 py-2 rounded-full transition-all"
             >
               Foton Traktör
             </Link>
             <Link
-              href="/products?search=karataş"
+              href="/urunler?categoryId=45"
               className="text-sm bg-gray-50 hover:bg-primary hover:text-white text-gray-700 px-4 py-2 rounded-full transition-all"
             >
               Karataş Traktör

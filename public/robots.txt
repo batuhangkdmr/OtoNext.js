@@ -23,8 +23,9 @@ Allow: /iletisim
 Allow: /blog
 Allow: /hizmet-bolgelerimiz
 
-# Allow category pages
+# Allow category and search pages
 Allow: /urunler?categoryId=*
+Allow: /urunler?search=*
 
 # Mobile specific
 User-agent: Googlebot-Mobile
