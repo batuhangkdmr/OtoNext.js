@@ -113,12 +113,12 @@ export default async function Home() {
 
   // Product categories
   const categories = [
-    { name: 'Fren Sistemleri', icon: '🛑', link: '/products?search=fren' },
-    { name: 'Motor Yedek Parça', icon: '⚙️', link: '/products?search=motor' },
-    { name: 'Filtre Grubu', icon: '🔧', link: '/products?search=filtre' },
-    { name: 'Elektrik Sistemleri', icon: '⚡', link: '/products?search=elektrik' },
-    { name: 'Yağlar', icon: '🛢️', link: '/products?search=yağ' },
-    { name: 'Balata & Kampana', icon: '🔩', link: '/products?search=balata' },
+    { name: 'Fren Sistemleri', icon: '🛑', link: '/urunler?search=fren' },
+    { name: 'Motor Yedek Parça', icon: '⚙️', link: '/urunler?search=motor' },
+    { name: 'Filtre Grubu', icon: '🔧', link: '/urunler?search=filtre' },
+    { name: 'Elektrik Sistemleri', icon: '⚡', link: '/urunler?search=elektrik' },
+    { name: 'Yağlar', icon: '🛢️', link: '/urunler?search=yağ' },
+    { name: 'Balata & Kampana', icon: '🔩', link: '/urunler?search=balata' },
   ];
 
   return (
@@ -256,7 +256,7 @@ export default async function Home() {
                 },
                 potentialAction: {
                   '@type': 'SearchAction',
-                  target: 'https://yonelotoyedekparca.com/products?search={search_term_string}',
+                  target: 'https://yonelotoyedekparca.com/urunler?search={search_term_string}',
                   'query-input': 'required name=search_term_string',
                 },
               },
@@ -341,9 +341,9 @@ export default async function Home() {
                     />
                   </div>
                   
-                  <h3 className="text-2xl font-bold text-center mb-3 text-gray-900 group-hover:text-primary transition-colors">
+                  <p className="text-2xl font-bold text-center mb-3 text-gray-900 group-hover:text-primary transition-colors">
                     {brand.name}
-                  </h3>
+                  </p>
                   <div className="mb-4">
                     <div className="flex flex-wrap gap-2 justify-center">
                       {brand.models.map((model) => (
@@ -390,13 +390,13 @@ export default async function Home() {
             {['120-14', '85-12', '65-9', '50NC', 'Daily 4x4'].map((model) => (
               <Link
                 key={model}
-                href={`/products?search=iveco ${model.toLowerCase()}`}
+                href={`/urunler?search=iveco ${model.toLowerCase()}`}
                 className="group bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 p-6 text-center border-2 border-transparent hover:border-primary"
               >
                 <div className="text-4xl mb-3">🚐</div>
-                <h3 className="text-xl font-bold text-gray-900 group-hover:text-primary transition-colors">
+                <p className="text-xl font-bold text-gray-900 group-hover:text-primary transition-colors">
                   İveco {model}
-                </h3>
+                </p>
                 <p className="text-sm text-gray-600 mt-2">Yedek Parça</p>
               </Link>
             ))}
@@ -426,9 +426,9 @@ export default async function Home() {
                 <div className="text-4xl mb-3 group-hover:scale-110 transition-transform">
                   {category.icon}
                 </div>
-                <h3 className="text-base font-bold text-gray-900 group-hover:text-white transition-colors">
+                <p className="text-base font-bold text-gray-900 group-hover:text-white transition-colors">
                   {category.name}
-                </h3>
+                </p>
               </Link>
               ))}
             </div>
@@ -469,9 +469,9 @@ export default async function Home() {
                     </div>
                   )}
                   <div className="p-6">
-                    <h3 className="text-xl font-bold mb-2 text-gray-900 group-hover:text-primary transition-colors line-clamp-2">
-                      {product.Name}
-                    </h3>
+                <p className="text-xl font-bold mb-2 text-gray-900 group-hover:text-primary transition-colors line-clamp-2">
+                  {product.Name}
+                </p>
                   {product.Description && (
                       <p className="text-gray-600 text-sm line-clamp-2 mb-3">
                         {product.Description}
@@ -495,7 +495,7 @@ export default async function Home() {
 
             <div className="text-center mt-12">
               <Link
-                href="/products?search=iveco"
+                href="/urunler?search=iveco"
                 className="inline-block bg-primary text-white px-10 py-4 rounded-lg font-bold text-lg hover:bg-red-700 hover:scale-105 transition-all shadow-lg"
               >
                 Tüm İveco Ürünlerini Görüntüle
