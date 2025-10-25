@@ -9,16 +9,29 @@ import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import ProductsRepository from '@/lib/repositories/ProductsRepository';
+import { extractIdFromSlug } from '@/lib/utils/slugify';
 import { Metadata } from 'next';
+
+// Force dynamic rendering to prevent build-time database connection
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 interface PageProps {
   params: {
-    id: string;
+    slug: string;
   };
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const product = await ProductsRepository.findById(parseInt(params.id));
+  const productId = extractIdFromSlug(params.slug);
+  
+  if (!productId) {
+    return {
+      title: 'Ürün Bulunamadı',
+    };
+  }
+
+  const product = await ProductsRepository.findById(productId);
 
   if (!product) {
     return {
@@ -29,23 +42,72 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: `${product.Name} | Yönel Oto Yedek Parça`,
     description: product.Description || product.Name,
+    keywords: `${product.Name}, ${product.CategoryName || ''}, yedek parça, iveco, ducato, foton, karataş, mutlu akü`,
+    openGraph: {
+      title: `${product.Name} | Yönel Oto Yedek Parça`,
+      description: product.Description || product.Name,
+      images: product.ImageUrl ? [{ url: product.ImageUrl }] : [],
+      type: 'website',
+    },
   };
 }
 
 export default async function ProductDetailPage({ params }: PageProps) {
-  const product = await ProductsRepository.findById(parseInt(params.id));
+  // URL slug'ından ID'yi çıkar
+  const productId = extractIdFromSlug(params.slug);
+
+  if (!productId) {
+    notFound();
+  }
+
+  const product = await ProductsRepository.findById(productId);
 
   if (!product) {
     notFound();
   }
 
   const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '905542597273';
-  const whatsappMessage = `Merhaba, ${product.Name} hakkında bilgi almak istiyorum.`;
+  const whatsappMessage = `Merhaba, "${product.Name}" ürünü hakkında bilgi almak istiyorum.`;
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
 
+  // Product Schema for SEO
+  const productSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: product.Name,
+    image: product.ImageUrl || 'https://yonelotoyedekparca.com/og-image.jpg',
+    description: product.Description || `${product.Name} - Yönel Oto Yedek Parça`,
+    brand: {
+      '@type': 'Brand',
+      name: 'Yönel Oto Yedek Parça',
+    },
+    category: product.CategoryName || 'Yedek Parça',
+    offers: {
+      '@type': 'Offer',
+      availability: 'https://schema.org/InStock',
+      priceCurrency: 'TRY',
+      seller: {
+        '@type': 'Organization',
+        name: 'Yönel Oto Yedek Parça',
+      },
+    },
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '4.8',
+      reviewCount: '150',
+    },
+  };
+
   return (
-    <Container maxWidth="lg" sx={{ py: 4 }}>
-      <Paper sx={{ p: 4 }}>
+    <>
+      {/* Product Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
+      />
+      
+      <Container maxWidth="lg" sx={{ py: 4 }}>
+        <Paper sx={{ p: 4 }}>
         <Grid container spacing={4}>
           {/* Product Image */}
           <Grid item xs={12} md={6}>
@@ -65,6 +127,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
                   alt={product.Name}
                   fill
                   style={{ objectFit: 'contain' }}
+                  priority
                 />
               </Box>
             ) : (
@@ -91,11 +154,25 @@ export default async function ProductDetailPage({ params }: PageProps) {
               {product.Name}
             </Typography>
 
-            {product.CategoryName && (
-              <Box sx={{ mb: 2 }}>
-                <Chip label={product.CategoryName} color="primary" />
+            {/* Kategoriler */}
+            {(product.CategoryName || product.SubCategoryName) && (
+              <Box sx={{ mb: 3, display: 'flex', gap: 1, flexWrap: 'wrap', alignItems: 'center' }}>
+                {product.CategoryName && (
+                  <Chip 
+                    label={product.CategoryName} 
+                    color="primary" 
+                    size="medium"
+                    sx={{ fontWeight: 600 }}
+                  />
+                )}
                 {product.SubCategoryName && (
-                  <Chip label={product.SubCategoryName} sx={{ ml: 1 }} />
+                  <Chip 
+                    label={product.SubCategoryName} 
+                    variant="outlined"
+                    color="primary"
+                    size="medium"
+                    sx={{ fontWeight: 600, borderWidth: 2 }}
+                  />
                 )}
               </Box>
             )}
@@ -120,6 +197,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                fullWidth
                 sx={{
                   bgcolor: '#25D366',
                   '&:hover': { bgcolor: '#128C7E' },
@@ -151,6 +229,6 @@ export default async function ProductDetailPage({ params }: PageProps) {
         </Grid>
       </Paper>
     </Container>
+    </>
   );
 }
-

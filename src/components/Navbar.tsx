@@ -49,17 +49,34 @@ const menuItems = [
       </svg>
     )
   },
+  { 
+    label: 'İletişim', 
+    href: '/contact',
+    icon: (
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="h-7 w-7">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+      </svg>
+    )
+  },
 ];
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
 
+  // Mount guard to prevent hydration mismatch
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   // Prevent body scroll when drawer is open
   useEffect(() => {
+    if (!isMounted) return;
+    
     if (mobileOpen) {
       document.body.style.overflow = 'hidden';
     } else {
@@ -68,7 +85,7 @@ export default function Navbar() {
     return () => {
       document.body.style.overflow = 'unset';
     };
-  }, [mobileOpen]);
+  }, [mobileOpen, isMounted]);
 
   return (
     <>
@@ -158,24 +175,6 @@ export default function Navbar() {
                 {item.label}
               </Button>
             ))}
-            {/* İletişim - Only on Desktop */}
-            <Button
-              component={Link}
-              href="/contact"
-              sx={{
-                color: 'black',
-                fontSize: '1.125rem',
-                fontWeight: 600,
-                px: 2.5,
-                py: 1.25,
-                '&:hover': {
-                  color: '#a80000',
-                  backgroundColor: 'rgba(168, 0, 0, 0.05)',
-                },
-              }}
-            >
-              İletişim
-            </Button>
           </Box>
 
           {/* Modern Hamburger Menu Button */}
@@ -193,8 +192,8 @@ export default function Navbar() {
         </Box>
       </AppBar>
 
-      {/* Dropdown Menu (Top to Bottom) */}
-      {mobileOpen && (
+      {/* Dropdown Menu (Top to Bottom) - Only render on client */}
+      {isMounted && mobileOpen && (
         <>
           {/* Backdrop Overlay */}
           <div
@@ -243,25 +242,27 @@ export default function Navbar() {
             <div className="flex-1 overflow-y-auto">
               {/* Navigation Links Grid */}
               <nav className="grid grid-cols-2 gap-3 p-6">
-                {menuItems.map((item, index) => (
-                  <Link
-                    key={item.label}
-                    href={item.href}
-                    onClick={handleDrawerToggle}
-                    className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 p-6 text-center transition-all hover:shadow-lg active:scale-95"
-                    style={{
-                      animation: `scaleIn 0.3s ease-out ${index * 0.05}s both`,
-                    }}
-                  >
-                    {/* Icon Circle with Custom Icon */}
-                    <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-full bg-white shadow-sm text-red-600 transition-all group-hover:bg-red-50 group-hover:scale-110">
-                      {item.icon}
-                    </div>
-                    <span className="block text-sm font-semibold text-gray-800 transition-colors group-hover:text-red-600">
-                      {item.label}
-                    </span>
-                  </Link>
-                ))}
+                {menuItems
+                  .filter((item) => item.label !== 'İletişim') // İletişim'i mobilde gösterme
+                  .map((item, index) => (
+                    <Link
+                      key={item.label}
+                      href={item.href}
+                      onClick={handleDrawerToggle}
+                      className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 p-6 text-center transition-all hover:shadow-lg active:scale-95"
+                      style={{
+                        animation: `scaleIn 0.3s ease-out ${index * 0.05}s both`,
+                      }}
+                    >
+                      {/* Icon Circle with Custom Icon */}
+                      <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-full bg-white shadow-sm text-red-600 transition-all group-hover:bg-red-50 group-hover:scale-110">
+                        {item.icon}
+                      </div>
+                      <span className="block text-sm font-semibold text-gray-800 transition-colors group-hover:text-red-600">
+                        {item.label}
+                      </span>
+                    </Link>
+                  ))}
               </nav>
             </div>
 

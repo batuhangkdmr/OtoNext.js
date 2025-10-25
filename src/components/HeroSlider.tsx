@@ -32,18 +32,44 @@ const slides = [
     buttonText: 'Traktör Parçaları',
     buttonLink: '/products?search=traktör',
   },
+  {
+    id: 4,
+    title: 'Kaliteli Yedek Parça',
+    subtitle: 'Geniş Ürün Yelpazesi',
+    description: 'Motor, fren, filtre ve akü çözümlerinde uzman kadro',
+    image: '/gorsel.png',
+    buttonText: 'Tüm Ürünler',
+    buttonLink: '/products',
+  },
+  {
+    id: 5,
+    title: 'Mutlu Akü ve Yağlar',
+    subtitle: 'Orijinal ve Garantili Ürünler',
+    description: 'Araç ve traktörleriniz için en kaliteli bakım malzemeleri',
+    image: '/gorsel1.png',
+    buttonText: 'Ürünleri İncele',
+    buttonLink: '/products',
+  },
 ];
 
 export default function HeroSlider() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isMounted, setIsMounted] = useState(false);
+
+  // Mount guard to prevent hydration mismatch
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   useEffect(() => {
+    if (!isMounted) return;
+    
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, 5000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [isMounted]);
 
   const goToSlide = (index: number) => {
     setCurrentSlide(index);

@@ -9,6 +9,9 @@ import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import SliderImagesRepository from '@/lib/repositories/SliderImagesRepository';
 
+// Force dynamic rendering to avoid build-time database connection
+export const dynamic = 'force-dynamic';
+
 export default async function AdminSlidersPage() {
   const sliders = await SliderImagesRepository.findAll();
 

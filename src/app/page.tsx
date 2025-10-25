@@ -9,9 +9,9 @@ import Newsletter from '@/components/Newsletter';
 
   // Advanced SEO Optimized Metadata
 export const metadata: Metadata = {
-  title: 'Yönel Oto Yedek Parça | İveco Daily 120-14, 85-12, 65-9 | Fiat Ducato | Foton & Karataş Traktör | Mutlu Akü - Orijinal Yedek Parça',
-  description: 'İveco Daily 120-14, 85-12, 65-9, 50NC yedek parça. Fiat Ducato 2.3, 3.0 motor parçaları. Foton ve Karataş traktör yedek parça. Mutlu akü çeşitleri. 50+ yıllık tecrübe, orijinal parça garantisi, Türkiye geneli hızlı kargo. Fren balata, filtre, motor parçası stoklarımızda.',
-  keywords: 'iveco daily yedek parça, iveco 120-14 yedek parça, iveco 85-12 parça, iveco 65-9, iveco 50nc, iveco daily 4x4, fiat ducato yedek parça, ducato 2.3 motor, ducato 3.0, ducato fren balata, iveco fren sistemi, foton traktör yedek parça, foton filtre, karataş traktör parça, karataş hidrolik, mutlu akü, mutlu akü fiyat, ağır hizmet akü, traktör aküsü, iveco filtre, ducato yağ filtresi, ticari araç yedek parça, orijinal yedek parça, tokat yedek parça',
+  title: 'Yönel Oto Yedek Parça | İveco Daily 120-14, 85-12, 65-9, Eurobus | Fiat Ducato | Foton & Karataş Traktör | Mutlu Akü - Orijinal Yedek Parça',
+  description: 'İveco Daily 120-14, 85-12, 65-9, 50NC, Eurobus yedek parça. Fiat Ducato 2.3, 3.0 motor parçaları. Foton ve Karataş traktör yedek parça. Mutlu akü çeşitleri. 50+ yıllık tecrübe, orijinal parça garantisi, Türkiye geneli hızlı kargo. Fren balata, filtre, motor parçası stoklarımızda.',
+  keywords: 'iveco daily yedek parça, iveco 120-14 yedek parça, iveco 85-12 parça, iveco 65-9, iveco 50nc, iveco eurobus, iveco daily eurobus, iveco daily 4x4, fiat ducato yedek parça, ducato 2.3 motor, ducato 3.0, ducato fren balata, iveco fren sistemi, foton traktör yedek parça, foton filtre, karataş traktör parça, karataş hidrolik, mutlu akü, mutlu akü fiyat, ağır hizmet akü, traktör aküsü, iveco filtre, ducato yağ filtresi, ticari araç yedek parça, orijinal yedek parça, tokat yedek parça',
   alternates: {
     canonical: 'https://yonelotoyedekparca.com',
   },
@@ -52,18 +52,17 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  // Server-side data fetching (SSR) - İveco Products with Random Order
+  // Server-side data fetching (SSR) - İveco Products with Stable Order
   let featuredProducts: any[] = [];
   
   try {
     const result = await ProductsRepository.findAll({ 
-      limit: 20, // Daha fazla ürün çekiyoruz random için
+      limit: 6, // 6 ürün direkt çekiyoruz
       search: 'iveco'
     });
     
-    // Random sıralama ve 6 ürün seçimi
-    const shuffled = result.products.sort(() => Math.random() - 0.5);
-    featuredProducts = shuffled.slice(0, 6);
+    // Ürünleri direkt kullan (stable order for hydration)
+    featuredProducts = result.products;
   } catch (error) {
     console.log('⚠️ Products could not be loaded (database not configured)');
   }
@@ -275,14 +274,14 @@ export default async function Home() {
           <div className="max-w-6xl mx-auto text-center">
             {/* Main Heading - H1 for SEO */}
             <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold text-primary mb-6 leading-tight">
-              Foton Traktör Yedek Parçaları | Iveco Daily Yedek Parçaları | Karataş Traktör Yedek Parçaları | Mutlu Akü Yedek Parçaları
+              İveco Daily, Foton ve Karataş Traktör Yedek Parçaları
             </h1>
             
             {/* Description */}
             <p className="text-lg md:text-xl lg:text-2xl text-gray-700 leading-relaxed max-w-5xl mx-auto font-medium">
-              Foton traktör yedek parçaları, İveco Daily Eurobus yedek parçaları, Karataş traktör 
-              yedek parçaları, Ducato yedek parçaları ve Mutlu akü satışında Türkiye'nin güvenilir 
-              adresi.
+              İveco Daily (120-14, 85-12, 65-9, 50NC, Eurobus), Fiat Ducato (2.3, 3.0), Foton Traktör, 
+              Karataş Traktör yedek parçaları ve Mutlu Akü satışında Türkiye'nin güvenilir adresi. 
+              50+ yıllık tecrübe ile orijinal ve kaliteli yan sanayi ürünleri.
             </p>
 
             {/* Trust Badges */}
