@@ -3,8 +3,8 @@
 import AdminsRepository from '@/lib/repositories/AdminsRepository';
 import { generateToken } from '@/lib/auth/auth';
 import { setAuthCookie, deleteAuthCookie } from '@/lib/auth/cookies';
-import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
 
 // POST - Login
 export async function login(formData: FormData) {
@@ -37,8 +37,10 @@ export async function login(formData: FormData) {
     // Set cookie
     await setAuthCookie(token);
 
-    // Redirect to admin
-    redirect('/admin');
+    // Revalidate and return success
+    revalidatePath('/admin');
+    
+    return { success: true };
   } catch (error) {
     console.error('Login error:', error);
     return { success: false, error: 'Giriş yapılamadı.' };

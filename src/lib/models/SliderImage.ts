@@ -10,3 +10,8 @@ export interface CreateSliderImageDto {
   CloudinaryPublicId: string;
 }
 
+export interface UpdateSliderImageDto {
+  ImageUrl?: string;
+  CloudinaryPublicId?: string;
+}
+

@@ -2,10 +2,12 @@
 
 import { login } from '../actions';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function LoginForm() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   async function handleSubmit(formData: FormData) {
     setLoading(true);
@@ -16,8 +18,11 @@ export default function LoginForm() {
     if (result && !result.success) {
       setError(result.error || 'Giriş başarısız');
       setLoading(false);
+    } else if (result && result.success) {
+      // Başarılı giriş - admin paneline yönlendir
+      router.push('/admin');
+      router.refresh();
     }
-    // Success = redirect (middleware tarafından)
   }
 
   return (

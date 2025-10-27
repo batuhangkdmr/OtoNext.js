@@ -11,6 +11,7 @@ import IconButton from '@mui/material/IconButton';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Product } from '@/lib/models/Product';
 import { deleteProduct } from './actions';
 import { useRouter } from 'next/navigation';
@@ -43,6 +44,7 @@ export default function ProductsTable({ products }: Props) {
           <TableRow>
             <TableCell>ID</TableCell>
             <TableCell>Ürün Adı</TableCell>
+            <TableCell>Görsel</TableCell>
             <TableCell>Kategori</TableCell>
             <TableCell>Alt Kategori</TableCell>
             <TableCell align="right">İşlemler</TableCell>
@@ -53,6 +55,20 @@ export default function ProductsTable({ products }: Props) {
             <TableRow key={product.Id}>
               <TableCell>{product.Id}</TableCell>
               <TableCell>{product.Name}</TableCell>
+              <TableCell>
+                {product.ImageUrl ? (
+                  <div style={{ position: 'relative', width: 60, height: 60 }}>
+                    <Image
+                      src={product.ImageUrl}
+                      alt={product.Name}
+                      fill
+                      style={{ objectFit: 'contain' }}
+                    />
+                  </div>
+                ) : (
+                  <span style={{ color: '#999', fontSize: '12px' }}>Görsel yok</span>
+                )}
+              </TableCell>
               <TableCell>{product.CategoryName || '-'}</TableCell>
               <TableCell>{product.SubCategoryName || '-'}</TableCell>
               <TableCell align="right">
