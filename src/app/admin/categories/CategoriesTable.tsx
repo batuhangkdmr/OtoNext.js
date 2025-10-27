@@ -122,7 +122,7 @@ export default function CategoriesTable({ categories }: Props) {
     });
   };
 
-  const handleEditSubCategory = (subCategory: { Id: number; Name: string; ParentId: number }) => {
+  const handleEditSubCategory = (subCategory: { Id: number; Name: string; ParentId?: number }) => {
     handleOpenDialog({
       id: subCategory.Id,
       name: subCategory.Name,
