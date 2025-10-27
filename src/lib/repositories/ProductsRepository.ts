@@ -32,7 +32,7 @@ class ProductsRepository {
     const request = pool.request();
 
     if (params?.search) {
-      queryStr += ` AND p.Name LIKE '%' + @search + '%'`;
+      queryStr += ` AND (p.Name LIKE '%' + @search + '%' OR p.Description LIKE '%' + @search + '%' OR c.Name LIKE '%' + @search + '%' OR sc.Name LIKE '%' + @search + '%')`;
       request.input('search', sql.NVarChar, params.search);
     }
 
