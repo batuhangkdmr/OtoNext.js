@@ -84,24 +84,6 @@ export default function ProductsCarousel({ sliders }: Props) {
           );
         })}
       </div>
-
-      {/* Bottom Navigation */}
-      {sliders.length > 1 && (
-        <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 flex gap-2 md:gap-3 bg-white px-4 md:px-6 py-2 md:py-3 rounded-full shadow-lg">
-          {sliders.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setActiveIndex(index)}
-              className={`rounded-full transition-all duration-300 ${
-                index === activeIndex 
-                  ? 'bg-red-600 w-6 md:w-8 h-2.5' 
-                  : 'bg-gray-300 hover:bg-gray-400 w-2.5 h-2.5'
-              }`}
-              aria-label={`Slayt ${index + 1}`}
-            />
-          ))}
-        </div>
-      )}
     </div>
   );
 }
