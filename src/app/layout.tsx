@@ -1,9 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import ThemeRegistry from '@/components/ThemeRegistry';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import WhatsAppFloatButton from '@/components/WhatsAppFloatButton';
+import ConditionalLayout from '@/components/ConditionalLayout';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://yonelotoyedekparca.com'),
@@ -47,10 +45,7 @@ export default function RootLayout({
     <html lang="tr">
       <body className="antialiased">
         <ThemeRegistry>
-          <Navbar />
-          {children}
-          <Footer />
-          <WhatsAppFloatButton />
+          <ConditionalLayout>{children}</ConditionalLayout>
         </ThemeRegistry>
       </body>
     </html>
