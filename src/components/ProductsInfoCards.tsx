@@ -12,7 +12,7 @@ export default function ProductsInfoCards() {
     '✓ Orijinal ve Yan Sanayi Parçalar',
     '✓ 5000+ Ürün Çeşidi',
     '✓ Türkiye Geneli Hızlı Kargo',
-    '✓ 25 Yıllık Tecrübe',
+    '✓ 50 Yıllık Tecrübe',
     '✓ Teknik Destek ve Danışmanlık',
     '✓ Mutlu Akü Yetkili Bayi',
   ];
@@ -137,7 +137,7 @@ export default function ProductsInfoCards() {
           >
             <strong>İveco Daily yedek parça</strong>, <strong>Fiat Ducato yedek parça</strong>, 
             <strong> Foton traktör yedek parça</strong> ve <strong>Karataş traktör</strong> parçaları 
-            konusunda 25 yıllık tecrübemizle hizmet vermekteyiz. Tokat merkezli firmamız, Türkiye 
+            konusunda 50 yıllık tecrübemizle hizmet vermekteyiz. Tokat merkezli firmamız, Türkiye 
             geneline hızlı kargo ile ulaşmaktadır.
           </Typography>
 
@@ -196,7 +196,7 @@ export default function ProductsInfoCards() {
             </Box>
             <Box sx={{ textAlign: 'center', px: 3, py: 2, bgcolor: '#fff', borderRadius: 2, minWidth: '150px' }}>
               <Typography variant="h4" sx={{ fontWeight: 700, color: '#dc2626' }}>
-                25 Yıl
+                50 Yıl
               </Typography>
               <Typography variant="body2" color="text.secondary">
                 Tecrübe
