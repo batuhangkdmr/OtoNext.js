@@ -125,7 +125,7 @@ export default function SlidersTable({ sliders }: Props) {
         <Button
           variant="contained"
           startIcon={<AddPhotoAlternateIcon />}
-          onClick={handleOpenDialog}
+          onClick={() => handleOpenDialog()}
           disabled={loading}
           sx={{
             bgcolor: '#dc2626',
