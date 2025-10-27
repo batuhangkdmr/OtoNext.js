@@ -51,7 +51,7 @@ export default function ProductsCarousel({ sliders }: Props) {
   };
 
   return (
-    <div className="relative w-full h-[300px] md:h-[450px] mb-12 overflow-visible">
+    <div className="relative w-full h-[300px] md:h-[450px] mb-12 overflow-hidden">
       <div className="relative w-full h-full flex items-center justify-center" style={{ perspective: '1200px' }}>
         {sliders.map((slider, index) => {
           const style = getSlideStyle(index);
