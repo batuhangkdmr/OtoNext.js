@@ -31,7 +31,7 @@ interface Props {
 export default function ProductCard({ product }: Props) {
   const [quickViewOpen, setQuickViewOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
-  const { isFavorite, addFavorite, removeFavorite } = useFavorites();
+  const { isFavorite, toggleFavorite } = useFavorites();
   const isFav = isFavorite(product.Id);
   
   const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '905542597273';
@@ -42,11 +42,7 @@ export default function ProductCard({ product }: Props) {
   const handleFavoriteToggle = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    if (isFav) {
-      removeFavorite(product.Id);
-    } else {
-      addFavorite(product.Id);
-    }
+    toggleFavorite(product);
   };
 
   return (
