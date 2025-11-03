@@ -481,11 +481,11 @@ export default function AboutPage() {
 
             <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
               {[
-                { name: 'İveco Daily', link: '/urunler?categoryId=17' },
-                { name: 'Fiat Ducato', link: '/urunler?categoryId=55' },
-                { name: 'Foton Traktör', link: '/urunler?categoryId=34' },
-                { name: 'Karataş Traktör', link: '/urunler?categoryId=45' },
-                { name: 'Mutlu Akü', link: '/urunler?categoryId=36' },
+                { name: 'İveco Daily', link: '/urunler/iveco-daily' },
+                { name: 'Fiat Ducato', link: '/urunler/fiat-ducato' },
+                { name: 'Foton Traktör', link: '/urunler/foton' },
+                { name: 'Karataş Traktör', link: '/urunler/karatas' },
+                { name: 'Mutlu Akü', link: '/urunler/mutlu-aku' },
               ].map((brand) => (
                 <Link
                   key={brand.name}

@@ -1,43 +1,157 @@
-# Yönel Oto & Yedek Parça - Robots.txt
+# Yönel Oto Yedek Parça - Robots.txt
 # https://yonelotoyedekparca.com
-# Iveco Daily Yedek Parçaları (120-14, 85-12, 65-9, 50NC) - Foton, Karataş Traktör Parçaları
+# İveco Daily (120-14, 85-12, 65-9, 50NC) - Foton, Karataş Traktör, Ducato Yedek Parça
+
+# ==============================================
+# GLOBAL RULES FOR ALL BOTS
+# ==============================================
 
 User-agent: *
 Allow: /
 
-# Sitemap
+# Sitemap location (dynamic, auto-generated from database)
 Sitemap: https://yonelotoyedekparca.com/sitemap.xml
 
-# Crawl-delay for mobile optimization
+# Crawl delay for optimal performance
 Crawl-delay: 1
 
-# Disallow admin areas
-Disallow: /admin/
-Disallow: /login
-Disallow: /register
+# ==============================================
+# DISALLOW - ADMIN & AUTH PAGES
+# ==============================================
 
-# Allow important pages
+Disallow: /admin/
+Disallow: /admin
+Disallow: /auth/
+Disallow: /auth
+Disallow: /api/
+
+# ==============================================
+# ALLOW - PUBLIC PAGES (SEO Important)
+# ==============================================
+
+# Main pages
+Allow: /
 Allow: /urunler
+Allow: /urunler/
 Allow: /hakkimizda
 Allow: /iletisim
 Allow: /blog
-Allow: /hizmet-bolgelerimiz
+Allow: /blog/
 
-# Allow category and search pages
-Allow: /urunler?categoryId=*
-Allow: /urunler?search=*
+# Category pages (slug-based URLs)
+Allow: /urunler/iveco
+Allow: /urunler/iveco/
+Allow: /urunler/foton-traktor
+Allow: /urunler/foton-traktor/
+Allow: /urunler/karatas-traktor
+Allow: /urunler/karatas-traktor/
+Allow: /urunler/fiat-ducato
+Allow: /urunler/fiat-ducato/
+Allow: /urunler/mutlu-aku
+Allow: /urunler/mutlu-aku/
 
-# Mobile specific
-User-agent: Googlebot-Mobile
-Allow: /
-Crawl-delay: 1
+# Allow all hierarchical category URLs
+Allow: /urunler/*/*
 
-# Googlebot
+# Product detail pages
+Allow: /products/
+Allow: /products/*
+
+# ==============================================
+# DISALLOW - UTILITY PAGES
+# ==============================================
+
+# Avoid duplicate content from query parameters
+Disallow: /urunler?*
+Disallow: /products?*
+Disallow: /*?page=
+Disallow: /*?limit=
+Disallow: /*?sort=
+
+# ==============================================
+# GOOGLE BOT SPECIFIC
+# ==============================================
+
 User-agent: Googlebot
 Allow: /
 Crawl-delay: 1
 
-# Bingbot
+# Allow important assets for Google PageSpeed
+Allow: /*.css
+Allow: /*.js
+Allow: /*.jpg
+Allow: /*.jpeg
+Allow: /*.png
+Allow: /*.webp
+Allow: /*.avif
+Allow: /*.svg
+Allow: /*.gif
+
+# ==============================================
+# GOOGLE IMAGE BOT
+# ==============================================
+
+User-agent: Googlebot-Image
+Allow: /
+Allow: /assets/
+Allow: /images/
+Allow: /*.jpg
+Allow: /*.jpeg
+Allow: /*.png
+Allow: /*.webp
+
+# ==============================================
+# MOBILE GOOGLEBOT
+# ==============================================
+
+User-agent: Googlebot-Mobile
+Allow: /
+Crawl-delay: 1
+
+# ==============================================
+# BINGBOT
+# ==============================================
+
 User-agent: Bingbot
 Allow: /
-Crawl-delay: 1 
+Crawl-delay: 1
+
+# ==============================================
+# YANDEX
+# ==============================================
+
+User-agent: Yandex
+Allow: /
+Crawl-delay: 2
+
+# ==============================================
+# BAD BOTS - BLOCK
+# ==============================================
+
+# Block malicious crawlers
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+# ==============================================
+# IMPORTANT SEO NOTES
+# ==============================================
+
+# New URL Structure (SEO Optimized):
+# ✅ /urunler                           → All products
+# ✅ /urunler/iveco                     → Main category
+# ✅ /urunler/iveco/120-14              → Subcategory (hierarchical)
+# ✅ /urunler/foton-traktor/254         → Subcategory with slug
+# ✅ /products/sanziman-kovani-598      → Product detail
+
+# Old URL Structure (Blocked for duplicate content):
+# ❌ /urunler?categoryId=55
+# ❌ /products?search=motor

@@ -1,7 +1,8 @@
 'use server';
 
 import CategoriesRepository from '@/lib/repositories/CategoriesRepository';
-import { revalidatePath } from 'next/cache';
+import { revalidatePath, revalidateTag } from 'next/cache';
+import { CACHE_TAGS } from '@/lib/cache';
 
 // GET - All categories
 export async function getCategories() {
@@ -43,8 +44,11 @@ export async function createCategory(formData: FormData) {
       ParentId: parentId ? parseInt(parentId) : undefined,
     });
 
+    // Invalidate cache
+    revalidateTag(CACHE_TAGS.CATEGORIES);
     revalidatePath('/admin/categories');
     revalidatePath('/products');
+    revalidatePath('/urunler');
 
     return { success: true, message: 'Kategori başarıyla oluşturuldu!' };
   } catch (error) {
@@ -64,8 +68,11 @@ export async function updateCategory(id: number, formData: FormData) {
       ParentId: parentId ? parseInt(parentId) : undefined,
     });
 
+    // Invalidate cache
+    revalidateTag(CACHE_TAGS.CATEGORIES);
     revalidatePath('/admin/categories');
     revalidatePath('/products');
+    revalidatePath('/urunler');
 
     return { success: true, message: 'Kategori başarıyla güncellendi!' };
   } catch (error) {
@@ -82,8 +89,11 @@ export async function deleteCategory(id: number) {
       return { success: false, error: result.error || 'Kategori silinemedi' };
     }
 
+    // Invalidate cache
+    revalidateTag(CACHE_TAGS.CATEGORIES);
     revalidatePath('/admin/categories');
     revalidatePath('/products');
+    revalidatePath('/urunler');
 
     return { success: true, message: 'Kategori başarıyla silindi!' };
   } catch (error) {

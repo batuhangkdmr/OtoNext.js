@@ -11,8 +11,8 @@ const config: sql.config = {
     encrypt: true,
     trustServerCertificate: true,
     enableArithAbort: true,
-    connectTimeout: 60000, // 60 seconds for remote connections
-    requestTimeout: 60000,
+    connectTimeout: parseInt(process.env.DB_CONNECT_TIMEOUT || '120000'), // 120 seconds for Vercel
+    requestTimeout: parseInt(process.env.DB_REQUEST_TIMEOUT || '120000'),
     instanceName: process.env.DB_INSTANCE || undefined, // For named instances
   },
   pool: {
@@ -20,7 +20,7 @@ const config: sql.config = {
     min: 0,
     idleTimeoutMillis: 30000,
   },
-  connectionTimeout: 60000,
+  connectionTimeout: parseInt(process.env.DB_CONNECTION_TIMEOUT || '120000'),
 };
 
 let pool: sql.ConnectionPool | null = null;

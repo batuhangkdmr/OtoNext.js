@@ -1,14 +1,25 @@
 import { getConnection, sql } from '../db';
 import { SliderImage, CreateSliderImageDto, UpdateSliderImageDto } from '../models/SliderImage';
+import { unstable_cache } from 'next/cache';
+import { CACHE_TAGS, CACHE_REVALIDATE } from '../cache';
 
 class SliderImagesRepository {
-  // GET - All slider images
+  // GET - All slider images with cache
   static async findAll(): Promise<SliderImage[]> {
-    const pool = await getConnection();
-    const result = await pool
-      .request()
-      .query('SELECT * FROM SliderImages ORDER BY Id DESC');
-    return result.recordset;
+    return unstable_cache(
+      async () => {
+        const pool = await getConnection();
+        const result = await pool
+          .request()
+          .query('SELECT * FROM SliderImages ORDER BY Id DESC');
+        return result.recordset;
+      },
+      ['sliders-all'],
+      {
+        tags: [CACHE_TAGS.SLIDERS],
+        revalidate: CACHE_REVALIDATE.SLIDERS, // 10 minutes
+      }
+    )();
   }
 
   // GET - Single slider image
