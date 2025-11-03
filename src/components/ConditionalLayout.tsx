@@ -1,7 +1,7 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import Navbar from './Navbar';
+import CenterLogoNavbar from './CenterLogoNavbar';
 import Footer from './Footer';
 import WhatsAppFloatButton from './WhatsAppFloatButton';
 
@@ -16,16 +16,16 @@ export default function ConditionalLayout({
   const isAdminOrAuth = pathname.startsWith('/admin') || pathname.startsWith('/auth');
 
   if (isAdminOrAuth) {
-    return <>{children}</>;
+    return <div suppressHydrationWarning>{children}</div>;
   }
 
   return (
-    <>
-      <Navbar />
+    <div className="pt-[30px] lg:pt-0" suppressHydrationWarning>
+      <CenterLogoNavbar />
       {children}
       <Footer />
       <WhatsAppFloatButton />
-    </>
+    </div>
   );
 }
 

@@ -51,32 +51,34 @@ export default function ProductsCarousel({ sliders }: Props) {
   };
 
   return (
-    <div className="relative w-full h-[300px] md:h-[450px] mb-12 overflow-hidden">
-      <div className="relative w-full h-full flex items-center justify-center" style={{ perspective: '1200px' }}>
+    <div className="relative w-full mb-12 overflow-hidden">
+      {/* 16:9 Aspect Ratio Container */}
+      <div className="relative w-full aspect-[16/9] flex items-center justify-center" style={{ perspective: '1200px' }}>
         {sliders.map((slider, index) => {
           const style = getSlideStyle(index);
           return (
             <div
               key={slider.Id}
-              className="absolute w-[85%] md:w-[70%] h-[85%] bg-white rounded-2xl shadow-2xl overflow-hidden cursor-pointer transition-all duration-700 ease-out"
+              className="absolute w-[90%] md:w-[75%] aspect-[16/9] rounded-xl md:rounded-2xl overflow-hidden cursor-pointer transition-all duration-700 ease-out"
               style={style}
               onClick={() => setActiveIndex(index)}
             >
-              <div className="relative w-full h-full p-4 md:p-6">
+              {/* Image - No Padding, Full Fill */}
+              <div className="relative w-full h-full">
                 <Image
                   src={slider.ImageUrl}
                   alt={`Yönel Oto Yedek Parça - Görsel ${slider.Id}`}
                   fill
-                  className="object-contain"
+                  className="object-cover"
                   priority={index === 0}
                   unoptimized
-                  sizes="(max-width: 768px) 100vw, 1200px"
+                  sizes="(max-width: 768px) 90vw, 75vw"
                 />
               </div>
               
               {/* Active Badge */}
               {index === activeIndex && (
-                <div className="absolute top-4 right-4 bg-red-600 text-white px-4 py-1.5 rounded-full text-xs md:text-sm font-bold shadow-lg">
+                <div className="absolute top-3 right-3 md:top-4 md:right-4 bg-red-600 text-white px-3 py-1 md:px-4 md:py-1.5 rounded-full text-xs md:text-sm font-bold shadow-lg">
                   {activeIndex + 1} / {sliders.length}
                 </div>
               )}

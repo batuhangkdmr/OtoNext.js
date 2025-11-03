@@ -84,8 +84,33 @@ export default function Footer() {
             textAlign: 'center',
           }}
         >
-          <Typography variant="body2" sx={{ color: 'white' }}>
+          <Typography variant="body2" sx={{ color: 'white', mb: 1 }}>
             © {new Date().getFullYear()} Yönel Oto Yedek Parça. Tüm hakları saklıdır.
+          </Typography>
+          <Typography variant="body2" sx={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '0.875rem' }}>
+            Designed by{' '}
+            <a 
+              href="https://www.bariscanyonel.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              style={{ 
+                color: 'white', 
+                textDecoration: 'none',
+                fontWeight: 600,
+                transition: 'all 0.3s ease',
+                borderBottom: '1px solid transparent'
+              }}
+              onMouseOver={(e) => {
+                e.currentTarget.style.borderBottom = '1px solid white';
+                e.currentTarget.style.color = '#fbbf24';
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.style.borderBottom = '1px solid transparent';
+                e.currentTarget.style.color = 'white';
+              }}
+            >
+              Barış Can Yönel
+            </a>
           </Typography>
         </Box>
       </Container>

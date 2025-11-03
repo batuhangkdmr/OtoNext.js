@@ -46,6 +46,23 @@ a {
   }
 }
 
+/* Animate.css Custom Delays */
+.animate__delay-200ms {
+  animation-delay: 0.2s;
+}
+
+.animate__delay-300ms {
+  animation-delay: 0.3s;
+}
+
+.animate__delay-400ms {
+  animation-delay: 0.4s;
+}
+
+.animate__delay-500ms {
+  animation-delay: 0.5s;
+}
+
 /* Blog Content Styles */
 .blog-content {
   line-height: 1.8;

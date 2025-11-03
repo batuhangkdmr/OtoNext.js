@@ -17,53 +17,65 @@ import SearchIcon from '@mui/icons-material/Search';
 import FilterListOffIcon from '@mui/icons-material/FilterListOff';
 import { Category } from '@/lib/models/Category';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
+import { slugify } from '@/lib/utils/slugify';
 
 interface Props {
   categories: Category[];
+  activeCategory?: Category | null;
   onClose?: () => void; // Drawer'ı kapatma callback'i
 }
 
-export default function ProductsFilter({ categories, onClose }: Props) {
+export default function ProductsFilter({ categories, activeCategory, onClose }: Props) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [openCategories, setOpenCategories] = useState<Record<number, boolean>>({});
   const [searchTerm, setSearchTerm] = useState(searchParams.get('search') || '');
 
-  // Aktif kategoriyi bul
-  const activeCategoryId = searchParams.get('categoryId');
-  const activeCategory = useMemo(() => {
-    if (!activeCategoryId) return null;
-    const catId = parseInt(activeCategoryId);
-    // Ana kategorilerde ara
-    let found = categories.find(c => c.Id === catId);
-    if (found) return found;
-    // Alt kategorilerde ara
-    for (const cat of categories) {
-      if (cat.SubCategories) {
-        found = cat.SubCategories.find(sub => sub.Id === catId);
-        if (found) return found;
-      }
-    }
-    return null;
-  }, [activeCategoryId, categories]);
-
   // Aktif filtre var mı kontrolü
-  const hasActiveFilters = searchParams.get('search') || searchParams.get('categoryId');
+  const hasActiveFilters = searchParams.get('search') || activeCategory;
 
   const handleCategoryClick = (categoryId: number) => {
     setOpenCategories((prev) => ({ ...prev, [categoryId]: !prev[categoryId] }));
   };
 
-  const handleCategoryFilter = (categoryId?: number) => {
-    const params = new URLSearchParams(searchParams.toString());
-    if (categoryId) {
-      params.set('categoryId', categoryId.toString());
-    } else {
-      params.delete('categoryId');
+  // Bir kategorinin parent'ını bul
+  const findParentCategory = (category: Category): Category | null => {
+    for (const cat of categories) {
+      if (cat.SubCategories) {
+        for (const sub of cat.SubCategories) {
+          if (sub.Id === category.Id) {
+            return cat;
+          }
+        }
+      }
     }
+    return null;
+  };
+
+  const handleCategoryFilter = (category?: Category) => {
+    const params = new URLSearchParams(searchParams.toString());
     params.delete('page');
-    router.push(`/products?${params.toString()}`);
+    
+    let url = '/urunler';
+    if (category) {
+      // Alt kategori mi yoksa ana kategori mi kontrol et
+      const parentCat = findParentCategory(category);
+      
+      if (parentCat) {
+        // Alt kategori ise: /urunler/parent-slug/sub-slug
+        url += `/${slugify(parentCat.Name)}/${slugify(category.Name)}`;
+      } else {
+        // Ana kategori ise: /urunler/parent-slug
+        url += `/${slugify(category.Name)}`;
+      }
+    }
+    
+    if (params.toString()) {
+      url += `?${params.toString()}`;
+    }
+    
+    router.push(url);
     
     // Mobil drawer'ı kapat
     if (onClose) {
@@ -73,14 +85,29 @@ export default function ProductsFilter({ categories, onClose }: Props) {
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    const params = new URLSearchParams(searchParams.toString());
+    const params = new URLSearchParams();
     if (searchTerm) {
       params.set('search', searchTerm);
-    } else {
-      params.delete('search');
     }
-    params.delete('page');
-    router.push(`/products?${params.toString()}`);
+    
+    let url = '/urunler';
+    if (activeCategory) {
+      const parentCat = findParentCategory(activeCategory);
+      
+      if (parentCat) {
+        // Alt kategori ise: /urunler/parent-slug/sub-slug
+        url += `/${slugify(parentCat.Name)}/${slugify(activeCategory.Name)}`;
+      } else {
+        // Ana kategori ise: /urunler/parent-slug
+        url += `/${slugify(activeCategory.Name)}`;
+      }
+    }
+    
+    if (params.toString()) {
+      url += `?${params.toString()}`;
+    }
+    
+    router.push(url);
     
     // Mobil drawer'ı kapat
     if (onClose) {
@@ -91,7 +118,7 @@ export default function ProductsFilter({ categories, onClose }: Props) {
   // Tüm filtreleri temizle
   const clearAllFilters = () => {
     setSearchTerm('');
-    router.push('/products');
+    router.push('/urunler');
     
     // Mobil drawer'ı kapat
     if (onClose) {
@@ -101,15 +128,29 @@ export default function ProductsFilter({ categories, onClose }: Props) {
 
   // Tek bir filtreyi kaldır
   const removeFilter = (filterType: 'search' | 'category') => {
-    const params = new URLSearchParams(searchParams.toString());
     if (filterType === 'search') {
-      params.delete('search');
       setSearchTerm('');
+      let url = '/urunler';
+      if (activeCategory) {
+        const parentCat = findParentCategory(activeCategory);
+        
+        if (parentCat) {
+          // Alt kategori ise: /urunler/parent-slug/sub-slug
+          url += `/${slugify(parentCat.Name)}/${slugify(activeCategory.Name)}`;
+        } else {
+          // Ana kategori ise: /urunler/parent-slug
+          url += `/${slugify(activeCategory.Name)}`;
+        }
+      }
+      router.push(url);
     } else if (filterType === 'category') {
-      params.delete('categoryId');
+      const params = new URLSearchParams();
+      if (searchParams.get('search')) {
+        params.set('search', searchParams.get('search')!);
+      }
+      const url = params.toString() ? `/urunler?${params.toString()}` : '/urunler';
+      router.push(url);
     }
-    params.delete('page');
-    router.push(`/products?${params.toString()}`);
     
     // Mobil drawer'ı kapat
     if (onClose) {
@@ -198,7 +239,7 @@ export default function ProductsFilter({ categories, onClose }: Props) {
       <List component="nav">
         <ListItemButton
           onClick={() => handleCategoryFilter()}
-          selected={!activeCategoryId}
+          selected={!activeCategory}
           sx={{
             '&.Mui-selected': {
               bgcolor: '#a80000',
@@ -210,14 +251,14 @@ export default function ProductsFilter({ categories, onClose }: Props) {
           <ListItemText primary="Tüm Ürünler" />
         </ListItemButton>
         {categories.map((category) => {
-          const isCategoryActive = activeCategoryId === category.Id.toString();
+          const isCategoryActive = activeCategory?.Id === category.Id;
           return (
             <div key={category.Id}>
               <ListItemButton
                 onClick={() =>
                   category.SubCategories && category.SubCategories.length > 0
                     ? handleCategoryClick(category.Id)
-                    : handleCategoryFilter(category.Id)
+                    : handleCategoryFilter(category)
                 }
                 selected={isCategoryActive}
                 sx={{
@@ -237,7 +278,7 @@ export default function ProductsFilter({ categories, onClose }: Props) {
                 <Collapse in={openCategories[category.Id]} timeout="auto" unmountOnExit>
                   <List component="div" disablePadding>
                     {category.SubCategories.map((sub) => {
-                      const isSubActive = activeCategoryId === sub.Id.toString();
+                      const isSubActive = activeCategory?.Id === sub.Id;
                       return (
                         <ListItemButton
                           key={sub.Id}
@@ -250,7 +291,7 @@ export default function ProductsFilter({ categories, onClose }: Props) {
                             },
                           }}
                           selected={isSubActive}
-                          onClick={() => handleCategoryFilter(sub.Id)}
+                          onClick={() => handleCategoryFilter(sub)}
                         >
                           <ListItemText primary={sub.Name} />
                         </ListItemButton>

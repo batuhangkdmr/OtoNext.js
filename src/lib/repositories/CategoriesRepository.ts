@@ -1,5 +1,7 @@
 import { getConnection, sql } from '../db';
 import { Category, CreateCategoryDto, UpdateCategoryDto } from '../models/Category';
+import { unstable_cache } from 'next/cache';
+import { CACHE_TAGS, CACHE_REVALIDATE } from '../cache';
 
 class CategoriesRepository {
   // Helper to build category tree
@@ -12,14 +14,23 @@ class CategoriesRepository {
       }));
   }
 
-  // GET - All categories (hierarchical)
+  // GET - All categories (hierarchical) with cache
   static async findAll(): Promise<Category[]> {
-    const pool = await getConnection();
-    const result = await pool
-      .request()
-      .query('SELECT * FROM Categories ORDER BY Name');
-    
-    return this.buildTree(result.recordset);
+    return unstable_cache(
+      async () => {
+        const pool = await getConnection();
+        const result = await pool
+          .request()
+          .query('SELECT * FROM Categories ORDER BY Name');
+        
+        return this.buildTree(result.recordset);
+      },
+      ['categories-all'],
+      {
+        tags: [CACHE_TAGS.CATEGORIES],
+        revalidate: CACHE_REVALIDATE.CATEGORIES, // 1 hour
+      }
+    )();
   }
 
   // GET - Single category with subcategories

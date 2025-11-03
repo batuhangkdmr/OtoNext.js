@@ -39,15 +39,21 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
+  const canonicalUrl = `https://yonelotoyedekparca.com/products/${params.slug}`;
+
   return {
     title: `${product.Name} | Yönel Oto Yedek Parça`,
     description: product.Description || product.Name,
     keywords: `${product.Name}, ${product.CategoryName || ''}, yedek parça, iveco, ducato, foton, karataş, mutlu akü`,
+    alternates: {
+      canonical: canonicalUrl,
+    },
     openGraph: {
       title: `${product.Name} | Yönel Oto Yedek Parça`,
       description: product.Description || product.Name,
       images: product.ImageUrl ? [{ url: product.ImageUrl }] : [],
       type: 'website',
+      url: canonicalUrl,
     },
   };
 }
@@ -69,6 +75,38 @@ export default async function ProductDetailPage({ params }: PageProps) {
   const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '905542597273';
   const whatsappMessage = `Merhaba, "${product.Name}" ürünü hakkında bilgi almak istiyorum.`;
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+
+  // Breadcrumb Schema for Google
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Ana Sayfa',
+        item: 'https://yonelotoyedekparca.com',
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Ürünler',
+        item: 'https://yonelotoyedekparca.com/urunler',
+      },
+      ...(product.CategoryName ? [{
+        '@type': 'ListItem',
+        position: 3,
+        name: product.CategoryName,
+        item: `https://yonelotoyedekparca.com/urunler`,
+      }] : []),
+      {
+        '@type': 'ListItem',
+        position: product.CategoryName ? 4 : 3,
+        name: product.Name,
+        item: `https://yonelotoyedekparca.com/products/${params.slug}`,
+      },
+    ],
+  };
 
   // Product Schema for SEO
   const productSchema = {
@@ -100,6 +138,12 @@ export default async function ProductDetailPage({ params }: PageProps) {
 
   return (
     <>
+      {/* Breadcrumb Schema for Google */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+
       {/* Product Schema */}
       <script
         type="application/ld+json"

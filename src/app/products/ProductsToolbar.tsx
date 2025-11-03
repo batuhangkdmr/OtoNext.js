@@ -17,12 +17,14 @@ import SortIcon from '@mui/icons-material/Sort';
 import ViewModuleIcon from '@mui/icons-material/ViewModule';
 import ProductsFilter from './ProductsFilter';
 import { Category } from '@/lib/models/Category';
+import { slugify } from '@/lib/utils/slugify';
 
 interface Props {
   categories: Category[];
+  activeCategory?: Category | null;
 }
 
-export default function ProductsToolbar({ categories }: Props) {
+export default function ProductsToolbar({ categories, activeCategory }: Props) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -30,18 +32,62 @@ export default function ProductsToolbar({ categories }: Props) {
   const currentSort = searchParams.get('sort') || 'newest';
   const currentLimit = searchParams.get('limit') || '12';
 
+  // Bir kategorinin parent'ını bul
+  const findParentCategory = (category: Category): Category | null => {
+    for (const cat of categories) {
+      if (cat.SubCategories) {
+        for (const sub of cat.SubCategories) {
+          if (sub.Id === category.Id) {
+            return cat;
+          }
+        }
+      }
+    }
+    return null;
+  };
+
   const handleSortChange = (value: string) => {
     const params = new URLSearchParams(searchParams.toString());
     params.set('sort', value);
     params.delete('page'); // Reset to first page
-    router.push(`/products?${params.toString()}`);
+    
+    let url = '/urunler';
+    if (activeCategory) {
+      const parentCat = findParentCategory(activeCategory);
+      
+      if (parentCat) {
+        // Alt kategori ise: /urunler/parent-slug/sub-slug
+        url += `/${slugify(parentCat.Name)}/${slugify(activeCategory.Name)}`;
+      } else {
+        // Ana kategori ise: /urunler/parent-slug
+        url += `/${slugify(activeCategory.Name)}`;
+      }
+    }
+    url += `?${params.toString()}`;
+    
+    router.push(url);
   };
 
   const handleLimitChange = (value: string) => {
     const params = new URLSearchParams(searchParams.toString());
     params.set('limit', value);
     params.delete('page'); // Reset to first page
-    router.push(`/products?${params.toString()}`);
+    
+    let url = '/urunler';
+    if (activeCategory) {
+      const parentCat = findParentCategory(activeCategory);
+      
+      if (parentCat) {
+        // Alt kategori ise: /urunler/parent-slug/sub-slug
+        url += `/${slugify(parentCat.Name)}/${slugify(activeCategory.Name)}`;
+      } else {
+        // Ana kategori ise: /urunler/parent-slug
+        url += `/${slugify(activeCategory.Name)}`;
+      }
+    }
+    url += `?${params.toString()}`;
+    
+    router.push(url);
   };
 
   return (
@@ -163,7 +209,7 @@ export default function ProductsToolbar({ categories }: Props) {
 
         {/* Drawer Content */}
         <Box sx={{ p: 2 }}>
-          <ProductsFilter categories={categories} onClose={() => setDrawerOpen(false)} />
+          <ProductsFilter categories={categories} activeCategory={activeCategory} onClose={() => setDrawerOpen(false)} />
         </Box>
       </Drawer>
     </>
